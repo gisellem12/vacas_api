@@ -19,3 +19,4 @@ gunicorn
 
 with open("requirements.txt", "w") as f:
     f.write(requirements)
+web: python app.py
