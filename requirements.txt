@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1MreeZ81dBSoNTX8XQN5T93_vlodpcnDi
 """
 
-requirements = """
+requirements =
 flask
 torch
 torchvision
@@ -15,8 +15,7 @@ timm
 pillow
 scikit-learn
 gunicorn
-"""
+
 
 with open("requirements.txt", "w") as f:
     f.write(requirements)
-web: python app.py
