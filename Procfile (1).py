@@ -9,3 +9,4 @@ Original file is located at
 
 with open("Procfile", "w") as f:
     f.write("web: gunicorn app:app")
+web: python app.py
