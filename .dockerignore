@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.csv
+venv/
+prueba/
+predicciones_api/
+dockerfile.py
+Dockerfile.txt
+_dockerignore.py
