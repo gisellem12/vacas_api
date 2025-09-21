@@ -11,6 +11,7 @@ import timm
 import torch.nn as nn
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+import requests
 
 # --------------------
 # 🔹 Bloques SE y ASPP
@@ -95,9 +96,6 @@ transform = transforms.Compose([
 # 🔹 Normalizador de pesos
 # --------------------
 pesos_n = MinMaxScaler()
-# Reemplazar estos valores si entrenaste con MinMaxScaler real:
-# pesos_n.min_ = np.array([peso_min_dataset])
-# pesos_n.scale_ = np.array([escala_dataset])
 pesos_n.min_, pesos_n.scale_ = 0, 1
 
 # --------------------
@@ -112,20 +110,37 @@ def predecir_vaca(imagen_bytes):
     with torch.no_grad():
         salida = model(img_tensor).squeeze()
         peso_normalizado = salida.item()
-        # Evitamos negativos y aplicamos inversa de scaler
         peso_estimado = max(0, pesos_n.inverse_transform([[peso_normalizado]])[0][0])
     
     raza_predicha = "Holstein"  # Cambiar si tu modelo predice raza
-    return round(peso_estimado,     2), raza_predicha
+    return round(peso_estimado, 2), raza_predicha
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    if 'file' not in request.files:
-        return jsonify({"error":"No se subió archivo"}), 400
+    # 1️⃣ Caso: JSON con URL (AppSheet)
+    if request.is_json:
+        data = request.get_json()
+        if not data or 'imagen_url' not in data:
+            return jsonify({"error": "No se recibió la URL de la imagen"}), 400
+        
+        imagen_url = data['imagen_url']
+        try:
+            response = requests.get(imagen_url)
+            response.raise_for_status()
+        except Exception as e:
+            return jsonify({"error": f"No se pudo descargar la imagen: {e}"}), 400
+
+        peso, raza = predecir_vaca(response.content)
+        return jsonify({"peso": peso, "raza": raza})
     
-    file = request.files['file']
-    peso, raza = predecir_vaca(file.read())
-    return jsonify({"peso": peso, "raza": raza})
+    # 2️⃣ Caso: archivo subido directamente
+    elif 'file' in request.files:
+        file = request.files['file']
+        peso, raza = predecir_vaca(file.read())
+        return jsonify({"peso": peso, "raza": raza})
+
+    else:
+        return jsonify({"error": "No se subió archivo ni se envió JSON con URL"}), 400
 
 # --------------------
 # 🔹 Ejecutar servidor
