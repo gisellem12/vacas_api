@@ -1,26 +1,30 @@
 @echo off
-cls
-echo ============================
-echo Iniciando entorno virtual...
-echo ============================
-
-:: Activar el entorno virtual
-call venv\Scripts\activate.bat
+:: ------------------------------
+:: Run API de Vacas + Script de Predicciones
+:: ------------------------------
 
 echo ============================
 echo Iniciando API de Vacas...
 echo ============================
-start cmd /k "python app.py"
+
+:: Activar entorno virtual
+call venv\Scripts\activate.bat
+
+:: Correr Flask en segundo plano
+start "" python app.py
 
 :: Esperar 5 segundos para que la API arranque
-timeout /t 5 > nul
+timeout /t 5 /nobreak >nul
 
 echo ============================
-echo Iniciando script de predicciones automáticas...
+echo Ejecutando script de predicciones...
 echo ============================
-start cmd /k "python predicciones_api\predicts_api_auto.py"
+
+:: Correr script de predicciones
+python predicciones_api\predicts_api.py
 
 echo ============================
-echo Todo listo. API corriendo y script automático activo.
+echo Todo listo. API corriendo y CSV actualizado para AppSheet.
 echo ============================
+
 pause

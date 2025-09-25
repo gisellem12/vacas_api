@@ -1,7 +1,6 @@
-flask
-torch
-torchvision
-timm
-Pillow
-scikit-learn
-gunicorn
+fastapi
+uvicorn
+langchain-openai
+langchain-core
+pillow
+requests
