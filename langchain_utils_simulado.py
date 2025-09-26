@@ -1,22 +1,37 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
-from PIL import Image
 import base64
 import requests
 from io import BytesIO
 import os
+import json
+import re
+from PIL import Image 
+
 
 # Función para convertir imagen a base64
 def encode_image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
-
+    
 # Función para descargar imagen de URL
 def download_image_from_url(image_url):
-    response = requests.get(image_url)
-    image = Image.open(BytesIO(response.content))
-    return image
+    """Descarga una imagen desde una URL y la convierte a objeto PIL Image"""
+    try:
+        response = requests.get(image_url, timeout=30)
+        response.raise_for_status()  # Lanza excepción si hay error HTTP
+       
+        # Convertir bytes a imagen PIL
+        image = Image.open(BytesIO(response.content))
+        return image
+       
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Error descargando imagen: {e}")
+        return None
+    except Exception as e:
+        print(f"❌ Error procesando imagen: {e}")
+        return None
 
 # Datos de contexto con ejemplos
 EXAMPLES = """
@@ -31,8 +46,10 @@ EXAMPLES = """
 - Vaca 9: imagen_url=https://drive.google.com/uc?id=1vRl6QdmhJrF4TKGcbxHhmQSQKDu3dWiF, peso=459 kg
 """
 
+open_api_key = os.environ.get('OPEN_API_KEY')
+
 # Configura el modelo multimodal
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, api_key="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")
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, api_key=open_api_key)
 
 def analyze_cow_image_with_context(image_path_or_url):
     """Analiza una imagen de vaca con contexto de referencia"""
@@ -42,7 +59,7 @@ def analyze_cow_image_with_context(image_path_or_url):
         if image_path_or_url.startswith(('http://', 'https://')):
             # Es URL, descargar imagen
             image = download_image_from_url(image_path_or_url)
-            # Convertir a base64
+            # # Convertir a base64
             buffer = BytesIO()
             image.save(buffer, format="JPEG")
             image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
@@ -59,7 +76,7 @@ CONTEXTO DE REFERENCIA:
 {EXAMPLES}
 
 Basándote en estos ejemplos de referencia, analiza la imagen de la vaca y extrae:
-- Raza (ej: Brangus Roja, Brangus Negro, Brangus, Braford, Nelore, etc.)
+- Raza (ej: Holstein, Angus, Jersey, etc.)
 - Tamaño aproximado (pequeño/medio/grande, o en metros de altura)
 - Peso estimado (en kg, basado en apariencia visual y comparación con los ejemplos)
 - Condición corporal (gorda/delgada/media)
@@ -86,53 +103,92 @@ IMPORTANTE:
         print(f"❌ Error procesando imagen: {e}")
         return None
 
-def analyze_cow_image_local(image_path):
-    """Analiza una imagen local de vaca con contexto"""
+def extract_json_from_response(response_text):
+    """Extrae JSON del texto de respuesta del modelo"""
     
-    if not os.path.exists(image_path):
-        print(f"❌ Error: El archivo {image_path} no existe")
+    try:
+        # Método 1: Buscar JSON completo (incluyendo anidados)
+        # Patrón mejorado para capturar JSON con objetos anidados
+        json_pattern = r'```json\s*(\{.*?\})\s*```'
+        json_match = re.search(json_pattern, response_text, re.DOTALL)
+        if json_match:
+            json_str = json_match.group(1)
+            return json.loads(json_str)
+        
+        # Método 2: Buscar JSON sin markdown
+        json_pattern = r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}'
+        json_match = re.search(json_pattern, response_text, re.DOTALL)
+        if json_match:
+            json_str = json_match.group()
+            return json.loads(json_str)
+        
+        # Método 3: Buscar JSON en formato de texto
+        if 'json' in response_text.lower():
+            # Extraer contenido entre ```json y ```
+            start_marker = '```json'
+            end_marker = '```'
+            
+            start_idx = response_text.lower().find(start_marker)
+            if start_idx != -1:
+                start_idx += len(start_marker)
+                end_idx = response_text.find(end_marker, start_idx)
+                if end_idx != -1:
+                    json_str = response_text[start_idx:end_idx].strip()
+                    return json.loads(json_str)
+        
+        # Método 4: Buscar cualquier JSON válido con "raza"
+        json_pattern = r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*"raza"[^{}]*(?:\{[^{}]*\}[^{}]*)*\}'
+        json_match = re.search(json_pattern, response_text, re.DOTALL)
+        if json_match:
+            json_str = json_match.group()
+            return json.loads(json_str)
+        
+        return None
+        
+    except json.JSONDecodeError as e:
+        print(f"❌ Error parseando JSON: {e}")
+        print(f"Texto que causó el error: {response_text[:200]}...")
+        return None
+    except Exception as e:
+        print(f"❌ Error extrayendo JSON: {e}")
+        return None
+
+def analyze_cow_image_with_json_output(image_path_or_url):
+    """Analiza imagen y devuelve JSON estructurado"""
+    
+    # Obtener respuesta del modelo
+    response_text = analyze_cow_image_with_context(image_path_or_url)
+    
+    if not response_text:
         return None
     
-    return analyze_cow_image_with_context(image_path)
-
-def analyze_cow_image_url(image_url):
-    """Analiza una imagen de URL de vaca con contexto"""
-    return analyze_cow_image_with_context(image_url)
-
-# Función para probar con ejemplos de referencia
-def test_with_reference_examples():
-    """Prueba con algunos ejemplos de referencia"""
+    print(f"📝 Respuesta del modelo: {response_text}")
     
-    # URLs de ejemplo (puedes usar cualquiera de las del contexto)
-    test_urls = [
-        "https://drive.google.com/uc?id=1X8gum_ste-UQ-vvrH5-Wfaeuhdq3LonF",  # Vaca 1: 378 kg
-        "https://drive.google.com/uc?id=1p9zqcP2DeUEx993fjqnR6HrzJF5r_rix",  # Vaca 2: 446 kg
-        "https://drive.google.com/uc?id=1DwLycAIur8Hc1Beda3DQiYqMSOGucHQW",  # Vaca 3: 487 kg
-    ]
+    # Extraer JSON
+    json_data = extract_json_from_response(response_text)
     
-    for i, url in enumerate(test_urls, 1):
-        print(f"\n🔍 Analizando Vaca {i} (Peso real: {[378, 446, 487][i-1]} kg)")
-        print("-" * 50)
+    if json_data:
+        print("✅ JSON extraído correctamente:")
+        print(json.dumps(json_data, indent=2, ensure_ascii=False))
         
-        result = analyze_cow_image_url(url)
-        if result:
-            print(f"Resultado: {result}")
-        else:
-            print("❌ Error en el análisis")
-
-# Uso principal
-if __name__ == "__main__":
-    # Opción 1: Imagen local
-    # image_path = "angus-2.jpg"  # Tu imagen local
-    # output = analyze_cow_image_local(image_path)
-    # print("Resultado con imagen local:")
-    # print(output)
-    
-    # Opción 2: Imagen de URL
-    # image_url = "https://drive.google.com/uc?id=12ygJabwRTon0DoVliundkso-35w_ILxO"
-    # output = analyze_cow_image_url(image_url)
-    # print("Resultado con imagen de URL:")
-    # print(output)
-    
-    # Opción 3: Probar con ejemplos de referencia
-    test_with_reference_examples()
+        return json_data
+    else:
+        print("❌ No se pudo extraer JSON válido")
+        print("🔍 Intentando métodos alternativos...")
+        
+        # Método alternativo: buscar manualmente
+        try:
+            # Buscar entre ```json y ```
+            if '```json' in response_text:
+                start = response_text.find('```json') + 7
+                end = response_text.find('```', start)
+                if end > start:
+                    json_str = response_text[start:end].strip()
+                    json_data = json.loads(json_str)
+                    print("✅ JSON extraído con método alternativo:")
+                    print(json.dumps(json_data, indent=2, ensure_ascii=False))
+                    return json_data
+        except:
+            pass
+        
+        return None

@@ -1,16 +1,22 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from langchain_utils_simulado import analyze_cow_image_url, analyze_cow_image_local, analyze_cow_image_with_context
-app = FastAPI( )
+from langchain_utils_simulado import analyze_cow_image_with_json_output
+import uvicorn
+
+app = FastAPI()
 
 class Imagen(BaseModel):
     url: str
 
-@app.post("/items")
+@app.post("/predict")
 async def predecir(imagen: Imagen):
-    try:
-        resultado = analyze_cow_image_url(imagen.url)
-        return resultado
-    except Exception as e:
-        return {"error": str(e)}
+    resultado = analyze_cow_image_with_json_output(imagen.url)
+    return resultado
     
+# Define a path operation for the root URL
+@app.get("/")
+async def read_root():
+    return {"message": "Hello World"}
+    
+if __name__ == '__main__':
+    uvicorn.run(app)
