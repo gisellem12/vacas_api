@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from langchain_utils_simulado import analyze_cow_image_with_json_output
 import uvicorn
+import os
 
 app = FastAPI()
 
