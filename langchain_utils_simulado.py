@@ -46,27 +46,28 @@ EXAMPLES = """
 - Vaca 9: imagen_url=https://drive.google.com/uc?id=1vRl6QdmhJrF4TKGcbxHhmQSQKDu3dWiF, peso=459 kg
 """
 
-open_api_key = os.environ.get('OPEN_API_KEY')
-
 # Configura el modelo multimodal
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, api_key=open_api_key)
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, api_key="")
 
-def analyze_cow_image_with_context(image_path_or_url):
+def analyze_cow_image_with_context(image, is_base64 = False):
     """Analiza una imagen de vaca con contexto de referencia"""
     
     try:
         # Determinar si es URL o ruta local
-        if image_path_or_url.startswith(('http://', 'https://')):
-            # Es URL, descargar imagen
-            image = download_image_from_url(image_path_or_url)
-            # # Convertir a base64
-            buffer = BytesIO()
-            image.save(buffer, format="JPEG")
-            image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        if not is_base64:
+            if image.startswith(('http://', 'https://')):
+                # Es URL, descargar imagen
+                image = download_image_from_url(image)
+                # # Convertir a base64
+                buffer = BytesIO()
+                image.save(buffer, format="JPEG")
+                image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+            else:
+                # Es ruta local
+                image_base64 = encode_image_to_base64(image)
         else:
-            # Es ruta local
-            image_base64 = encode_image_to_base64(image_path_or_url)
-        
+            image_base64 = image
+            
         # Crear mensaje multimodal DIRECTO (sin prompt template)
         message = HumanMessage(
             content=[
@@ -153,11 +154,11 @@ def extract_json_from_response(response_text):
         print(f"❌ Error extrayendo JSON: {e}")
         return None
 
-def analyze_cow_image_with_json_output(image_path_or_url):
+def analyze_cow_image_with_json_output(image_path_or_url, is_base64 = False):
     """Analiza imagen y devuelve JSON estructurado"""
     
     # Obtener respuesta del modelo
-    response_text = analyze_cow_image_with_context(image_path_or_url)
+    response_text = analyze_cow_image_with_context(image_path_or_url, is_base64)
     
     if not response_text:
         return None
@@ -192,3 +193,5 @@ def analyze_cow_image_with_json_output(image_path_or_url):
             pass
         
         return None
+    analyze_cow_image_with_json_output()
+
