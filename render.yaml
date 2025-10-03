@@ -1,0 +1,12 @@
+# Archivo de configuración para Render
+services:
+  - type: web
+    name: vacas-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000
