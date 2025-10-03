@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(236, 253, 245, 0.8) 100%),
+        url('https://certifiedhumanelatino.org/wp-content/uploads/2021/06/Design-sem-nome-2-1.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 6rem 1rem 3rem;
+}

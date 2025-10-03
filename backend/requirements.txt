@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+langchain-openai
+langchain-core
+pillow
+requests
+python-multipart
+chardet
