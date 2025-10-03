@@ -18,10 +18,12 @@ services:
     env: node
     plan: free
     rootDir: "./frontend"
-    buildCommand: npm install
-    startCommand: npm run dev
+    buildCommand: npm install --production=false && npm run build
+    startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: https://vacas-backend.onrender.com
       - key: PORT
         value: 10000
+      - key: NODE_ENV
+        value: production

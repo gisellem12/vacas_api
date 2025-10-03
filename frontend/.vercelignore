@@ -1,0 +1,3 @@
+# Ignorar archivos para Vercel (si lo usamos después)
+.next
+node_modules
