@@ -18,8 +18,8 @@ services:
     env: node
     plan: free
     rootDir: "./frontend"
-    buildCommand: npm ci && npm run build
-    startCommand: npm run start
+    buildCommand: npm install
+    startCommand: npm run dev
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: https://vacas-backend.onrender.com
