@@ -1,14 +1,20 @@
 #!/bin/bash
 
-echo "🔧 Installing dependencies..."
-npm install
+# Clean install dependencies
+echo "Installing dependencies..."
+npm ci --include=dev
 
-echo "🏗️ Building Next.js application..."
+# Run build
+echo "Building application..."
 npm run build
 
-echo "✅ Build completed successfully!"
-echo "📁 Contents of .next directory:"
-ls -la .next/
+# Verify build exists
+if [ -d ".next" ]; then
+    echo "✅ Build successful - .next directory exists"
+    ls -la .next/
+else
+    echo "❌ Build failed - .next directory not found"
+    exit 1
+fi
 
-echo "📁 Contents of .next/BUILD_ID:"
-cat .next/BUILD_ID || echo "BUILD_ID not found"
+echo "Build process completed successfully"

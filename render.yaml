@@ -18,7 +18,7 @@ services:
     env: node
     plan: free
     rootDir: "./frontend"
-    buildCommand: npm install --production=false && npm run build
+    buildCommand: bash build.sh
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
