@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Clean install dependencies
+# Install dependencies
 echo "Installing dependencies..."
-npm ci --include=dev
+npm ci
 
 # Run build
 echo "Building application..."
