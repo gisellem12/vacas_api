@@ -5,6 +5,20 @@ import { APP_CONFIG, PredictionResult } from '@/config/app';
 import { ResultsDisplay, VeterinaryRecommendationsDisplay } from '@/components/ResultsDisplay';
 import { formatPriceForDisplay, calculateCowPrice } from '@/utils/formatters';
 
+// Declaraciones de tipos para Google Identity Services
+declare global {
+  interface Window {
+    google: {
+      accounts: {
+        id: {
+          initialize: (config: any) => void;
+          renderButton: (element: HTMLElement, config: any) => void;
+        };
+      };
+    };
+  }
+}
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState('inicio');
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -127,13 +141,233 @@ export default function Home() {
     setAnalysisResult(null);
   };
 
+  // ===== FUNCIONES DE NOTIFICACIÓN =====
+  const showNotification = (message: string, type: 'success' | 'error') => {
+    // Crear elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 ${
+      type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+    }`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    // Remover después de 3 segundos
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
+  };
+
+  // ===== MANEJO DE FORMULARIOS =====
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    
+    if (email && password) {
+      try {
+        const response = await fetch(`${APP_CONFIG.API_BASE_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          showNotification('✅ ¡Inicio de sesión exitoso!', 'success');
+          setShowLoginModal(false);
+          // Reset del formulario de manera segura
+          try {
+            if (e.currentTarget) {
+              e.currentTarget.reset();
+            }
+          } catch (error) {
+            console.log('⚠ No se pudo resetear el formulario, pero el login fue exitoso');
+          }
+        } else {
+          showNotification(`⚠ Error: ${data.message}`, 'error');
+        }
+      } catch (error) {
+        showNotification(`⚠ Error de conexión: ${error instanceof Error ? error.message : 'Error desconocido'}`, 'error');
+      }
+    } else {
+      showNotification('⚠ Por favor, completa todos los campos', 'error');
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('🔐 Iniciando proceso de registro...');
+    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+    
+    console.log('📝 Datos del formulario:', { email, password: password ? '***' : 'vacío', confirmPassword: confirmPassword ? '***' : 'vacío' });
+    
+    if (!email || !password || !confirmPassword) {
+      console.log('❌ Campos vacíos detectados');
+      showNotification('⚠ Por favor, completa todos los campos', 'error');
+      return;
+    }
+    
+    if (password !== confirmPassword) {
+      console.log('❌ Contraseñas no coinciden');
+      showNotification('⚠ Las contraseñas no coinciden', 'error');
+      return;
+    }
+    
+    if (password.length < 8) {
+      console.log('❌ Contraseña muy corta');
+      showNotification('⚠ La contraseña debe tener al menos 8 caracteres', 'error');
+      return;
+    }
+
+    console.log('📡 Enviando datos al backend...');
+    try {
+      const response = await fetch(`${APP_CONFIG.API_BASE_URL}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      console.log('📨 Respuesta del backend:', response.status, response.statusText);
+      const data = await response.json();
+      console.log('📊 Datos recibidos:', data);
+      
+      if (response.ok) {
+        console.log('✅ Registro exitoso');
+        showNotification('✅ ¡Registro exitoso! Bienvenido a AgroTech Vision', 'success');
+        setShowRegisterModal(false);
+        // Reset del formulario de manera segura
+        try {
+          if (e.currentTarget) {
+            e.currentTarget.reset();
+          }
+        } catch (error) {
+          console.log('⚠ No se pudo resetear el formulario, pero el registro fue exitoso');
+        }
+      } else {
+        console.log('❌ Error del backend:', data.message);
+        showNotification(`⚠ Error: ${data.message}`, 'error');
+      }
+    } catch (error) {
+      console.error('❌ Error de conexión:', error);
+      showNotification(`⚠ Error de conexión: ${error instanceof Error ? error.message : 'Error desconocido'}`, 'error');
+    }
+  };
+
+  // ===== GOOGLE OAUTH CONFIGURATION =====
+  useEffect(() => {
+    // Cargar el script de Google Identity Services solo si no existe
+    if (!document.querySelector('script[src="https://accounts.google.com/gsi/client"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+
+      // Configurar Google OAuth cuando el script se carga
+      script.onload = () => {
+        if (window.google) {
+          window.google.accounts.id.initialize({
+            client_id: '490126152605-00mok4vj7o1m1m2n5v7i6udhmrn6f180.apps.googleusercontent.com',
+            callback: handleGoogleResponse,
+            auto_select: false,
+            cancel_on_tap_outside: true
+          });
+        }
+      };
+    } else if (window.google) {
+      // Si el script ya existe, solo inicializar
+      window.google.accounts.id.initialize({
+        client_id: '490126152605-00mok4vj7o1m1m2n5v7i6udhmrn6f180.apps.googleusercontent.com',
+        callback: handleGoogleResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+    }
+  }, []);
+
+  // Renderizar botones cuando se abren los modales
+  useEffect(() => {
+    if (showLoginModal || showRegisterModal) {
+      setTimeout(() => {
+        renderGoogleButtons();
+      }, 200);
+    }
+  }, [showLoginModal, showRegisterModal]);
+
+  const renderGoogleButtons = () => {
+    // Renderizar botón de login
+    const loginButton = document.querySelector('#g_id_onload') as HTMLElement;
+    if (loginButton && window.google) {
+      window.google.accounts.id.renderButton(loginButton, {
+        type: 'standard',
+        shape: 'rectangular',
+        theme: 'outline',
+        text: 'signin_with',
+        size: 'large',
+        width: '100%'
+      });
+    }
+
+    // Renderizar botón de registro
+    const registerButton = document.querySelector('#g_id_onload_register') as HTMLElement;
+    if (registerButton && window.google) {
+      window.google.accounts.id.renderButton(registerButton, {
+        type: 'standard',
+        shape: 'rectangular',
+        theme: 'outline',
+        text: 'signup_with',
+        size: 'large',
+        width: '100%'
+      });
+    }
+  };
+
+  const handleGoogleResponse = async (response: any) => {
+    try {
+      console.log('🔐 Respuesta de Google recibida:', response);
+      
+      // Enviar el token de Google al backend
+      const backendResponse = await fetch(`${APP_CONFIG.API_BASE_URL}/google-login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          credential: response.credential
+        })
+      });
+
+      const userData = await backendResponse.json();
+      console.log('📡 Respuesta del backend:', userData);
+      
+      if (backendResponse.ok) {
+        showNotification(`✅ Bienvenido ${userData.user?.name || userData.user?.email}`, 'success');
+        setShowLoginModal(false);
+        setShowRegisterModal(false);
+        // Aquí podrías guardar el token en localStorage o en el estado global
+        // localStorage.setItem('authToken', userData.token);
+      } else {
+        showNotification(`❌ Error: ${userData.message}`, 'error');
+      }
+    } catch (error) {
+      console.error('Error al procesar respuesta de Google:', error);
+      showNotification('❌ Error al iniciar sesión con Google', 'error');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modales */}
       {showLoginModal && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setShowLoginModal(false)}>
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-6 text-center relative">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowLoginModal(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-6 rounded-t-2xl text-center relative">
               <button className="absolute top-4 right-4 text-white hover:bg-white/20 p-2 rounded-lg transition-colors" onClick={() => setShowLoginModal(false)}>&times;</button>
               <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
                 <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
@@ -141,18 +375,18 @@ export default function Home() {
               <p>Accede a tu cuenta de AgroTech Vision</p>
             </div>
             <div className="p-6">
-              <form onSubmit={(e) => { e.preventDefault(); setShowLoginModal(false); }}>
+              <form onSubmit={handleLogin}>
                 <div className="mb-5">
                   <label htmlFor="loginEmail" className="block mb-2 font-semibold text-gray-900">
                     <i className="fas fa-envelope mr-2"></i> Correo Electrónico
                   </label>
-                  <input type="email" id="loginEmail" placeholder="tu.email@ejemplo.com" required className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none transition-colors" />
+                  <input type="email" name="email" id="loginEmail" placeholder="tu.email@ejemplo.com" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors" />
                 </div>
                 <div className="mb-5">
                   <label htmlFor="loginPassword" className="block mb-2 font-semibold text-gray-900">
                     <i className="fas fa-lock mr-2"></i> Contraseña
                   </label>
-                  <input type="password" id="loginPassword" placeholder="Tu contraseña" required className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none transition-colors" />
+                  <input type="password" name="password" id="loginPassword" placeholder="Tu contraseña" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors" />
                 </div>
                 <div className="flex justify-between items-center mb-6">
                   <div className="flex items-center">
@@ -161,27 +395,25 @@ export default function Home() {
                   </div>
                   <a href="#" className="text-emerald-600 text-sm hover:underline">¿Olvidaste tu contraseña?</a>
                 </div>
-                <button type="submit" className="w-full bg-emerald-500 text-white p-3 rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2">
+                <button type="submit" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg w-full">
                   <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
                 </button>
               </form>
               
-              <div className="flex items-center my-6 text-gray-400">
-                <div className="flex-1 border-t border-gray-200"></div>
-                <span className="px-4 text-sm">o continuar con</span>
-                <div className="flex-1 border-t border-gray-200"></div>
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">o continuar con</span>
+                </div>
               </div>
               
               <div className="space-y-3">
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-google"></i> Google
-                </button>
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-facebook-f"></i> Facebook
-                </button>
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-apple"></i> Apple
-                </button>
+                <div 
+                  id="g_id_onload"
+                  className="w-full"
+                ></div>
               </div>
               
               <div className="text-center mt-6 text-gray-600">
@@ -193,9 +425,9 @@ export default function Home() {
       )}
 
       {showRegisterModal && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setShowRegisterModal(false)}>
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-6 text-center relative">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowRegisterModal(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-6 rounded-t-2xl text-center relative">
               <button className="absolute top-4 right-4 text-white hover:bg-white/20 p-2 rounded-lg transition-colors" onClick={() => setShowRegisterModal(false)}>&times;</button>
               <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
                 <i className="fas fa-user-plus"></i> Crear Cuenta
@@ -203,46 +435,44 @@ export default function Home() {
               <p>Únete a AgroTech Vision y comienza a transformar tu ganadería</p>
             </div>
             <div className="p-6">
-              <form onSubmit={(e) => { e.preventDefault(); setShowRegisterModal(false); }}>
+              <form onSubmit={handleRegister}>
                 <div className="mb-5">
                   <label htmlFor="registerEmail" className="block mb-2 font-semibold text-gray-900">
                     <i className="fas fa-envelope mr-2"></i> Correo Electrónico
                   </label>
-                  <input type="email" id="registerEmail" placeholder="tu.email@ejemplo.com" required className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none transition-colors" />
+                  <input type="email" name="email" id="registerEmail" placeholder="tu.email@ejemplo.com" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors" />
                 </div>
                 <div className="mb-5">
                   <label htmlFor="registerPassword" className="block mb-2 font-semibold text-gray-900">
                     <i className="fas fa-lock mr-2"></i> Contraseña
                   </label>
-                  <input type="password" id="registerPassword" placeholder="Mínimo 8 caracteres" required minLength={8} className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none transition-colors" />
+                  <input type="password" name="password" id="registerPassword" placeholder="Mínimo 8 caracteres" required minLength={8} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors" />
                 </div>
                 <div className="mb-6">
                   <label htmlFor="confirmPassword" className="block mb-2 font-semibold text-gray-900">
                     <i className="fas fa-lock mr-2"></i> Confirmar Contraseña
                   </label>
-                  <input type="password" id="confirmPassword" placeholder="Repite tu contraseña" required className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none transition-colors" />
+                  <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Repite tu contraseña" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors" />
                 </div>
-                <button type="submit" className="w-full bg-emerald-500 text-white p-3 rounded-lg font-semibold hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2">
+                <button type="submit" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg w-full" onClick={() => console.log('🔘 Botón de registro clickeado')}>
                   <i className="fas fa-user-plus"></i> Registrarse
                 </button>
               </form>
               
-              <div className="flex items-center my-6 text-gray-400">
-                <div className="flex-1 border-t border-gray-200"></div>
-                <span className="px-4 text-sm">o registrarse con</span>
-                <div className="flex-1 border-t border-gray-200"></div>
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">o registrarse con</span>
+                </div>
               </div>
               
               <div className="space-y-3">
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-google"></i> Google
-                </button>
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-facebook-f"></i> Facebook
-                </button>
-                <button className="w-full p-3 border-2 border-gray-200 rounded-lg hover:border-gray-300 transition-colors flex items-center justify-center gap-3">
-                  <i className="fab fa-apple"></i> Apple
-                </button>
+                <div 
+                  id="g_id_onload_register"
+                  className="w-full"
+                ></div>
               </div>
               
               <div className="text-center mt-6 text-gray-600">
@@ -257,7 +487,7 @@ export default function Home() {
       <header className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div className="max-w-6xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
-            <a href="#" className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <a href="#" className="text-2xl font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
               AgroTech
             </a>
             
@@ -265,42 +495,50 @@ export default function Home() {
               <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
             </button>
             
-            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-2 md:gap-6`}>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'inicio' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'mision' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'como-funciona' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'chat' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'contacto' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
-              <a href="#" className={`px-3 py-1 rounded-lg transition-colors text-center md:text-left text-sm ${activeSection === 'planes' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
+            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-1 md:gap-8`}>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'inicio' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'mision' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'planes' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
             </nav>
             
-            <div className="hidden md:flex gap-2">
-              <a href="#" className="px-3 py-1 text-gray-600 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors hover:border-emerald-300 text-sm" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>Entrar</a>
-              <a href="#" className="px-4 py-1 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg text-sm" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>Registrarse</a>
-            </div>
+        <div className="hidden md:flex gap-3">
+          <a href="#" className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>Entrar</a>
+          <a href="#" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>Registrarse</a>
+        </div>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-base font-medium mb-6 border border-green-300">
-            <i className="fas fa-star text-green-600"></i>
+      {/* Sección Principal con Imagen de Fondo */}
+      <section className="min-h-screen min-h-dvh bg-gradient-to-br from-white/98 to-emerald-50/30 bg-[url('https://certifiedhumanelatino.org/wp-content/uploads/2021/06/Design-sem-nome-2-1.png')] bg-cover bg-center bg-fixed flex items-center relative py-24 px-4">
+        {/* Overlay adicional con gradiente diagonal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-emerald-50/15 z-1"></div> 
+        
+        {/* Contenido principal centrado */}
+        <div className="w-full max-w-6xl mx-auto relative z-10 text-center">
+          {/* Badge superior */}
+          <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-emerald-200">
+            <i className="fas fa-star"></i>
             Revolucionando la ganadería con IA
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          {/* Título principal */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
             Pesaje Inteligente de Ganado con Inteligencia Artificial
           </h1>
           
-          <p className="text-base md:text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+          {/* Subtítulo */}
+          <p className="text-base md:text-lg lg:text-xl text-gray-800 mb-8 max-w-2xl mx-auto leading-relaxed">
             La solución más innovadora para la gestión moderna de ganado. 
             Precisa, no invasiva y accesible desde tu dispositivo móvil.
           </p>
         
+          {/* Botón de acción */}
           <div className="flex justify-center">
-            <a href="#" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border-2 border-gray-300 text-gray-800 rounded-lg font-semibold hover:border-gray-400 hover:bg-gray-50/50 transition-all duration-300 shadow-md" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
+            <a href="#" className="bg-transparent border-2 border-emerald-500 text-emerald-600 px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base hover:bg-emerald-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 min-h-[54px]" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
               <i className="fas fa-robot"></i>
               Probar IA Gratis
             </a>
@@ -320,31 +558,31 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-emerald-50 to-white rounded-2xl p-8 mb-12 text-center shadow-lg border border-emerald-100 max-w-4xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <span className="text-3xl md:text-4xl font-bold text-emerald-500 block mb-1">97%</span>
-                <span className="text-sm text-gray-600 font-medium">Precisión</span>
-              </div>
-              <div className="text-center">
-                <span className="text-3xl md:text-4xl font-bold text-emerald-500 block mb-1">0%</span>
-                <span className="text-sm text-gray-600 font-medium">Estrés Animal</span>
-              </div>
-              <div className="text-center">
-                <span className="text-3xl md:text-4xl font-bold text-emerald-500 block mb-1">24/7</span>
-                <span className="text-sm text-gray-600 font-medium">Disponible</span>
-              </div>
-              <div className="text-center">
-                <span className="text-3xl md:text-4xl font-bold text-emerald-500 block mb-1">100%</span>
-                <span className="text-sm text-gray-600 font-medium">Mobile</span>
-              </div>
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">97%</span>
+              <span className="text-sm text-gray-600 font-medium">Precisión</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">0%</span>
+              <span className="text-sm text-gray-600 font-medium">Estrés Animal</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">24/7</span>
+              <span className="text-sm text-gray-600 font-medium">Disponible</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">100%</span>
+              <span className="text-sm text-gray-600 font-medium">Mobile</span>
             </div>
           </div>
+        </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center">
               <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-camera text-2xl text-emerald-500"></i>
+                <i className="fas fa-camera"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Captura Simple</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -353,9 +591,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center">
               <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-brain text-2xl text-emerald-500"></i>
+                <i className="fas fa-brain"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Análisis Inteligente</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -364,9 +602,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center">
               <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-chart-line text-2xl text-emerald-500"></i>
+                <i className="fas fa-chart-line"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Resultados Inmediatos</h3>
               <p className="text-sm text-gray-600 leading-relaxed">

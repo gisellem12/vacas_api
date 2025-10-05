@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException, Form, File, UploadFile
+from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import requests
 from io import BytesIO
@@ -8,8 +9,30 @@ import tempfile
 from langchain_utils_simulado import analyze_cow_image_with_json_output
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import timedelta
+
+# Importar módulos de autenticación
+from auth import (
+    verify_google_token, 
+    create_or_get_user_from_google, 
+    create_user, 
+    authenticate_user,
+    create_access_token,
+    verify_token
+)
+from models import (
+    LoginRequest, 
+    RegisterRequest, 
+    GoogleLoginRequest, 
+    UserResponse, 
+    AuthResponse, 
+    ErrorResponse
+)
 
 app = FastAPI(title="AgroTech Vision API")
+
+# Configurar seguridad
+security = HTTPBearer()
 
 #enable cors
 origins = ["*"]
@@ -24,6 +47,167 @@ app.add_middleware(
 
 class CowURL(BaseModel):
     url: str
+
+# ===== ENDPOINTS DE AUTENTICACIÓN =====
+
+@app.post("/google-login", response_model=AuthResponse)
+async def google_login(request: GoogleLoginRequest):
+    """Endpoint para autenticación con Google OAuth"""
+    try:
+        print(f"🔐 Procesando login con Google...")
+        
+        # Verificar token de Google
+        google_data = verify_google_token(request.credential)
+        if not google_data:
+            return AuthResponse(
+                success=False,
+                message="Token de Google inválido"
+            )
+        
+        print(f"✅ Token de Google verificado para: {google_data['email']}")
+        
+        # Crear o obtener usuario
+        user = create_or_get_user_from_google(google_data)
+        
+        # Crear token JWT
+        token_data = {
+            "sub": user['email'],
+            "name": user['name'],
+            "login_method": user['login_method']
+        }
+        access_token = create_access_token(token_data)
+        
+        print(f"✅ Usuario autenticado: {user['email']}")
+        
+        return AuthResponse(
+            success=True,
+            message=f"Bienvenido {user['name']}",
+            user=UserResponse(**user),
+            token=access_token
+        )
+        
+    except Exception as e:
+        print(f"❌ Error en Google login: {e}")
+        return AuthResponse(
+            success=False,
+            message=f"Error en autenticación con Google: {str(e)}"
+        )
+
+@app.post("/login", response_model=AuthResponse)
+async def login(request: LoginRequest):
+    """Endpoint para autenticación tradicional"""
+    try:
+        print(f"🔐 Procesando login tradicional para: {request.email}")
+        
+        # Autenticar usuario
+        user = authenticate_user(request.email, request.password)
+        if not user:
+            return AuthResponse(
+                success=False,
+                message="Credenciales inválidas"
+            )
+        
+        print(f"✅ Usuario autenticado: {user['email']}")
+        
+        # Crear token JWT
+        token_data = {
+            "sub": user['email'],
+            "name": user['name'],
+            "login_method": user['login_method']
+        }
+        access_token = create_access_token(token_data)
+        
+        return AuthResponse(
+            success=True,
+            message="Inicio de sesión exitoso",
+            user=UserResponse(**user),
+            token=access_token
+        )
+        
+    except Exception as e:
+        print(f"❌ Error en login tradicional: {e}")
+        return AuthResponse(
+            success=False,
+            message=f"Error en autenticación: {str(e)}"
+        )
+
+@app.post("/register", response_model=AuthResponse)
+async def register(request: RegisterRequest):
+    """Endpoint para registro de usuarios"""
+    try:
+        print(f"📝 Procesando registro para: {request.email}")
+        
+        # Validar contraseña
+        if len(request.password) < 8:
+            return AuthResponse(
+                success=False,
+                message="La contraseña debe tener al menos 8 caracteres"
+            )
+        
+        # Crear usuario
+        user = create_user(request.email, request.password, request.name)
+        
+        print(f"✅ Usuario registrado: {user['email']}")
+        
+        # Crear token JWT
+        token_data = {
+            "sub": user['email'],
+            "name": user['name'],
+            "login_method": user['login_method']
+        }
+        access_token = create_access_token(token_data)
+        
+        return AuthResponse(
+            success=True,
+            message="Registro exitoso! Bienvenido a AgroTech Vision",
+            user=UserResponse(**user),
+            token=access_token
+        )
+        
+    except ValueError as e:
+        print(f"❌ Error de validación en registro: {e}")
+        return AuthResponse(
+            success=False,
+            message=str(e)
+        )
+    except Exception as e:
+        print(f"❌ Error en registro: {e}")
+        return AuthResponse(
+            success=False,
+            message=f"Error en registro: {str(e)}"
+        )
+
+@app.get("/me", response_model=UserResponse)
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Endpoint para obtener información del usuario actual"""
+    try:
+        token = credentials.credentials
+        payload = verify_token(token)
+        
+        if not payload:
+            raise HTTPException(status_code=401, detail="Token inválido")
+        
+        email = payload.get("sub")
+        if not email:
+            raise HTTPException(status_code=401, detail="Token inválido")
+        
+        # Aquí deberías obtener el usuario de la base de datos
+        # Por simplicidad, devolvemos datos básicos del token
+        return UserResponse(
+            email=email,
+            name=payload.get("name", email.split('@')[0]),
+            created_at="2024-01-01T00:00:00",
+            last_login="2024-01-01T00:00:00",
+            login_method=payload.get("login_method", "email")
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ Error obteniendo usuario: {e}")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
+
+# ===== ENDPOINTS EXISTENTES =====
 
 @app.post("/predict")
 async def predict(cow: CowURL):

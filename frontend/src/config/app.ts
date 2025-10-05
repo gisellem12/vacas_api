@@ -1,6 +1,6 @@
 // Configuración de la aplicación
 export const APP_CONFIG = {
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://agrotechvision.up.railway.app',
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
   MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
   ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   UPLOAD_PROGRESS_INTERVAL: 200, // ms
