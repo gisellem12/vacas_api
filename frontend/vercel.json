@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "package.json",
@@ -7,6 +6,6 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://vacas-backend.onrender.com"
+    "NEXT_PUBLIC_API_URL": "https://tu-backend.railway.app"
   }
 }

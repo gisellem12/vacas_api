@@ -1,6 +1,0 @@
-fastapi==0.118.0
-uvicorn==0.37.0
-python-multipart==0.0.20
-langchain-openai==0.3.33
-Pillow==11.3.0
-python-dotenv==1.1.1

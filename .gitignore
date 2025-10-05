@@ -1,13 +1,6 @@
-# Directorio duplicado
-vacas_api/
-
 # Archivos de configuración local
 backend/config.env
 backend/.env
-
-# Next.js
-.next/
-out/
 
 # Logs
 *.log
@@ -32,3 +25,5 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+.next/
