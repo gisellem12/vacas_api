@@ -6,3 +6,13 @@ pillow
 requests
 python-multipart
 chardet
+google-auth
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+email-validator
+numpy
+scikit-learn
+pandas
+matplotlib
+seaborn
