@@ -31,16 +31,14 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result }) => {
           <div className="text-xl font-bold text-amber-800" aria-label={`Peso: ${result.peso} kilogramos`}>{result.peso} kg</div>
         </div>
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl text-center border border-blue-200">
-          <div className="text-xs font-bold text-blue-700 uppercase tracking-wide mb-2">Tamaño</div>
-          <div className="text-xl font-bold text-blue-800 capitalize" aria-label={`Tamaño: ${result.tamaño}`}>{result.tamaño}</div>
+          <div className="text-xs font-bold text-blue-700 uppercase tracking-wide mb-2">Precio</div>
+          <div className="text-xl font-bold text-blue-800 capitalize" aria-label={`Precio: ${result.precio}`}>{result.precio}</div>
         </div>
         <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl text-center border border-green-200">
-          <div className="text-xs font-bold text-green-700 uppercase tracking-wide mb-2">Condición</div>
-          <div className="text-xl font-bold text-green-800 capitalize" aria-label={`Condición: ${result.condicion}`}>{result.condicion}</div>
-        </div>
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl text-center border border-purple-200">
-          <div className="text-xs font-bold text-purple-700 uppercase tracking-wide mb-2">Estado</div>
-          <div className="text-xl font-bold text-purple-800 capitalize" aria-label="Estado: Analizado">Analizado</div>
+          <div className="text-xs font-bold text-green-700 uppercase tracking-wide mb-2">Recomendaciones</div>
+          <div className="text-xl font-bold text-green-800 capitalize" aria-label={`Recomendaciones: ${result.recomendaciones.manejo}`}>{result.recomendaciones.manejo}</div>
+          <div className="text-xl font-bold text-green-800 capitalize" aria-label={`Recomendaciones: ${result.recomendaciones.nutricion}`}>{result.recomendaciones.nutricion}</div>
+          <div className="text-xl font-bold text-green-800 capitalize" aria-label={`Recomendaciones: ${result.recomendaciones.salud}`}>{result.recomendaciones.salud}</div>
         </div>
       </div>
 
