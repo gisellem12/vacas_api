@@ -10,6 +10,7 @@ from langchain_utils_simulado import analyze_cow_image_with_json_output
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
+from contextlib import asynccontextmanager
 
 # Importar módulos de autenticación
 from auth import (
@@ -31,11 +32,9 @@ from models import (
     ErrorResponse
 )
 
-app = FastAPI(title="AgroTech Vision API")
-
 # Inicializar base de datos al startup
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     """Inicializar la base de datos al arrancar la aplicación"""
     try:
         print("🔧 Inicializando base de datos...")
@@ -49,6 +48,12 @@ async def startup_event():
             print("⚠️ Advertencia: No se pudo conectar a la base de datos")
     except Exception as e:
         print(f"❌ Error inicializando base de datos: {e}")
+    
+    yield  # La aplicación está ejecutándose
+    
+    # Código de cleanup aquí si es necesario
+
+app = FastAPI(title="AgroTech Vision API", lifespan=lifespan)
 
 # Configurar seguridad
 security = HTTPBearer()

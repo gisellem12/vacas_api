@@ -65,7 +65,8 @@ def test_connection():
     try:
         db = SessionLocal()
         # Intentar hacer una consulta simple
-        db.execute("SELECT 1")
+        from sqlalchemy import text
+        db.execute(text("SELECT 1"))
         db.close()
         print("✅ Conexión a la base de datos exitosa")
         return True
