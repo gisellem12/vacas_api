@@ -16,3 +16,6 @@ scikit-learn
 pandas
 matplotlib
 seaborn
+sqlalchemy
+mysql-connector-python
+alembic

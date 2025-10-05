@@ -8,6 +8,8 @@ from google.oauth2 import id_token
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from dotenv import load_dotenv
+from sqlalchemy.orm import Session
+from database import User, get_db
 
 # Cargar variables de entorno
 load_dotenv()
@@ -22,9 +24,6 @@ GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "490126152605-00mok4vj7o1m1m2n5
 
 # Configuración de hash de contraseñas
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-# Base de datos simple en memoria (en producción usarías una base de datos real)
-users_db: Dict[str, Dict[str, Any]] = {}
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verificar contraseña"""
@@ -80,60 +79,97 @@ def verify_google_token(token: str) -> Optional[Dict[str, Any]]:
 
 def create_or_get_user_from_google(google_data: Dict[str, Any]) -> Dict[str, Any]:
     """Crear o obtener usuario desde datos de Google"""
-    email = google_data['email']
-    
-    if email in users_db:
-        # Usuario existe, actualizar datos
-        users_db[email].update({
-            'name': google_data['name'],
-            'picture': google_data['picture'],
-            'google_id': google_data['google_id'],
-            'last_login': datetime.utcnow().isoformat()
-        })
-    else:
-        # Crear nuevo usuario
-        users_db[email] = {
-            'email': email,
-            'name': google_data['name'],
-            'picture': google_data['picture'],
-            'google_id': google_data['google_id'],
-            'created_at': datetime.utcnow().isoformat(),
-            'last_login': datetime.utcnow().isoformat(),
-            'login_method': 'google'
-        }
-    
-    return users_db[email]
+    db = next(get_db())
+    try:
+        email = google_data['email']
+        
+        # Buscar usuario existente
+        user = db.query(User).filter(User.email == email).first()
+        
+        if user:
+            # Usuario existe, actualizar datos
+            user.name = google_data['name']
+            user.picture = google_data['picture']
+            user.google_id = google_data['google_id']
+            user.last_login = datetime.utcnow()
+            user.login_method = 'google'
+            db.commit()
+            db.refresh(user)
+        else:
+            # Crear nuevo usuario
+            user = User(
+                email=email,
+                name=google_data['name'],
+                picture=google_data['picture'],
+                google_id=google_data['google_id'],
+                login_method='google',
+                created_at=datetime.utcnow(),
+                last_login=datetime.utcnow()
+            )
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+        
+        return user.to_dict()
+    finally:
+        db.close()
 
 def create_user(email: str, password: str, name: Optional[str] = None) -> Dict[str, Any]:
     """Crear usuario tradicional"""
-    if email in users_db:
-        raise ValueError("El usuario ya existe")
-    
-    hashed_password = get_password_hash(password)
-    users_db[email] = {
-        'email': email,
-        'name': name or email.split('@')[0],
-        'password_hash': hashed_password,
-        'created_at': datetime.utcnow().isoformat(),
-        'last_login': datetime.utcnow().isoformat(),
-        'login_method': 'email'
-    }
-    
-    return users_db[email]
+    db = next(get_db())
+    try:
+        # Verificar si el usuario ya existe
+        existing_user = db.query(User).filter(User.email == email).first()
+        if existing_user:
+            raise ValueError("El usuario ya existe")
+        
+        hashed_password = get_password_hash(password)
+        user = User(
+            email=email,
+            name=name or email.split('@')[0],
+            password_hash=hashed_password,
+            login_method='email',
+            created_at=datetime.utcnow(),
+            last_login=datetime.utcnow()
+        )
+        
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        
+        return user.to_dict()
+    finally:
+        db.close()
 
 def authenticate_user(email: str, password: str) -> Optional[Dict[str, Any]]:
     """Autenticar usuario tradicional"""
-    user = users_db.get(email)
-    if not user:
+    db = next(get_db())
+    try:
+        user = db.query(User).filter(User.email == email).first()
+        if not user:
+            return None
+        
+        if not user.password_hash:
+            return None
+        
+        if not verify_password(password, user.password_hash):
+            return None
+        
+        # Actualizar último login
+        user.last_login = datetime.utcnow()
+        db.commit()
+        
+        return user.to_dict()
+    finally:
+        db.close()
+
+def get_user_by_email(email: str) -> Optional[Dict[str, Any]]:
+    """Obtener usuario por email"""
+    db = next(get_db())
+    try:
+        user = db.query(User).filter(User.email == email).first()
+        if user:
+            return user.to_dict()
         return None
-    
-    if 'password_hash' not in user:
-        return None
-    
-    if not verify_password(password, user['password_hash']):
-        return None
-    
-    # Actualizar último login
-    user['last_login'] = datetime.utcnow().isoformat()
-    
-    return user
+    finally:
+        db.close()

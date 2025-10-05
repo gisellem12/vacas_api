@@ -18,8 +18,10 @@ from auth import (
     create_user, 
     authenticate_user,
     create_access_token,
-    verify_token
+    verify_token,
+    get_user_by_email
 )
+from database import create_tables, test_connection
 from models import (
     LoginRequest, 
     RegisterRequest, 
@@ -30,6 +32,23 @@ from models import (
 )
 
 app = FastAPI(title="AgroTech Vision API")
+
+# Inicializar base de datos al startup
+@app.on_event("startup")
+async def startup_event():
+    """Inicializar la base de datos al arrancar la aplicación"""
+    try:
+        print("🔧 Inicializando base de datos...")
+        create_tables()
+        print("✅ Tablas de base de datos creadas")
+        
+        # Probar conexión
+        if test_connection():
+            print("✅ Conexión a MySQL exitosa")
+        else:
+            print("⚠️ Advertencia: No se pudo conectar a la base de datos")
+    except Exception as e:
+        print(f"❌ Error inicializando base de datos: {e}")
 
 # Configurar seguridad
 security = HTTPBearer()
@@ -191,15 +210,12 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         if not email:
             raise HTTPException(status_code=401, detail="Token inválido")
         
-        # Aquí deberías obtener el usuario de la base de datos
-        # Por simplicidad, devolvemos datos básicos del token
-        return UserResponse(
-            email=email,
-            name=payload.get("name", email.split('@')[0]),
-            created_at="2024-01-01T00:00:00",
-            last_login="2024-01-01T00:00:00",
-            login_method=payload.get("login_method", "email")
-        )
+        # Obtener usuario de la base de datos
+        user = get_user_by_email(email)
+        if not user:
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        
+        return UserResponse(**user)
         
     except HTTPException:
         raise
