@@ -11,6 +11,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
 from contextlib import asynccontextmanager
+import asyncio
 
 # Importar módulos de autenticación
 from auth import (
@@ -322,6 +323,11 @@ async def predict_file(file: UploadFile = File(...)):
     if not file.content_type or not file.content_type.startswith('image/'):
         raise HTTPException(status_code=400, detail="El archivo debe ser una imagen")
     
+    # Verificar tamaño del archivo (50MB máximo)
+    MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+    if file.size and file.size > MAX_FILE_SIZE:
+        raise HTTPException(status_code=413, detail=f"El archivo es demasiado grande. Máximo permitido: {MAX_FILE_SIZE // (1024 * 1024)}MB")
+    
     try:
         # Leer el contenido del archivo
         print("📖 Leyendo contenido del archivo...")
@@ -346,9 +352,18 @@ async def predict_file(file: UploadFile = File(...)):
             print(f"✅ Archivo temporal guardado: {temp_file_path}")
         
         try:
-            # Analizar imagen con la función de tu IA
+            # Analizar imagen con la función de tu IA con timeout
             print("🤖 Iniciando análisis con IA...")
-            resultado = analyze_cow_image_with_json_output(temp_file_path)
+            try:
+                # Timeout de 4 minutos para el análisis
+                resultado = await asyncio.wait_for(
+                    asyncio.to_thread(analyze_cow_image_with_json_output, temp_file_path),
+                    timeout=240
+                )
+            except asyncio.TimeoutError:
+                print("⏰ Timeout en el análisis de IA")
+                raise HTTPException(status_code=408, detail="El análisis tardó demasiado. Intenta con una imagen más pequeña.")
+            
             if not resultado:
                 print("❌ La IA no pudo procesar la imagen")
                 raise ValueError("No se pudo procesar la imagen con la IA")

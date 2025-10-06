@@ -49,8 +49,8 @@ export default function Home() {
       return;
     }
     
-    if (file.size > 10 * 1024 * 1024) {
-      alert('❌ La imagen debe ser menor a 10MB');
+    if (file.size > 50 * 1024 * 1024) {
+      alert('❌ La imagen debe ser menor a 50MB');
       return;
     }
     
@@ -965,23 +965,23 @@ export default function Home() {
               <ul className="text-left space-y-2 mb-6 text-xs text-gray-700 flex-grow">
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-gray-500 text-xs"></i>
-                  5 predicciones por mes
+                  10 predicciones por mes
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-gray-500 text-xs"></i>
-                  Solo acceso web
+                  Resultados basicos 
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="fas fa-times text-red-500 text-xs"></i>
+                  Recomendaciones 
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-gray-500 text-xs"></i>
-                  Resultados básicos
+                  Acceso desde móvil/tablet
                 </li>
                 <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-gray-500 text-xs"></i>
-                  Sin historial
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-gray-500 text-xs"></i>
-                  Soporte por email
+                  <i className="fas fa-times text-red-500 text-xs"></i>
+                  Soporte técnico
                 </li>
               </ul>
               <button className="w-full bg-gray-500 text-white py-2 rounded-lg font-semibold hover:bg-gray-600 transition-colors shadow-md hover:shadow-lg text-sm">
@@ -997,13 +997,13 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Básico</h3>
               <div className="mb-4">
-                <div className="text-2xl font-bold text-emerald-600 mb-1">85.000</div>
+                <div className="text-2xl font-bold text-emerald-600 mb-1">285.000</div>
                 <div className="text-xs text-gray-600">PYG / mes</div>
               </div>
               <ul className="text-left space-y-2 mb-6 text-xs text-gray-700 flex-grow">
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-emerald-500 text-xs"></i>
-                  100 predicciones/mes
+                  100 predicciones por mes
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-emerald-500 text-xs"></i>
@@ -1015,19 +1015,15 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-emerald-500 text-xs"></i>
-                  Historial 30 días
+                  Recomendaciones personalizadas
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-emerald-500 text-xs"></i>
-                  Tutorial interactivo
+                  Acceso desde móvil/tablet
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-emerald-500 text-xs"></i>
-                  Notificaciones email
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-emerald-500 text-xs"></i>
-                  Soporte por email
+                  Soporte técnico
                 </li>
               </ul>
               <button className="w-full bg-emerald-500 text-white py-2 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg text-sm">
@@ -1046,30 +1042,22 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Pro</h3>
               <div className="mb-4">
-                <div className="text-2xl font-bold text-blue-600 mb-1">285.000</div>
+                <div className="text-2xl font-bold text-blue-600 mb-1">570.000</div>
                 <div className="text-xs text-gray-600">PYG / mes</div>
                 <div className="text-xs text-green-600 font-semibold">💰 15% desc. anual</div>
               </div>
               <ul className="text-left space-y-2 mb-6 text-xs text-gray-700 flex-grow">
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
-                  1.000 predicciones/mes
+                  600 predicciones por mes
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Historial completo
+                  Web y app móvil
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Reportes PDF/Excel
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Comparativas animales
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Alertas peso anormal
+                  Resultados instantáneos
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
@@ -1077,15 +1065,11 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Capacitación videollamada
+                  Acceso desde móvil/tablet
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Soporte WhatsApp
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-blue-500 text-xs"></i>
-                  Sincronización automática
+                  Soporte técnico prioritario
                 </li>
               </ul>
               <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg text-sm">
@@ -1101,50 +1085,34 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Premium</h3>
               <div className="mb-4">
-                <div className="text-2xl font-bold text-purple-600 mb-1">1.050.000</div>
+                <div className="text-2xl font-bold text-purple-600 mb-1">1.500.000</div>
                 <div className="text-xs text-gray-600">PYG / mes</div>
                 <div className="text-xs text-green-600 font-semibold">💰 20% desc. anual</div>
               </div>
               <ul className="text-left space-y-2 mb-6 text-xs text-gray-700 flex-grow">
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  5.000 predicciones/mes
+                  3.000 predicciones/mes
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Acceso completo API
+                  Hasta 5 usuarios
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Reportes IA avanzados
+                  Resultados instantáneos
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Análisis predictivo
+                  Recomendaciones personalizadas
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Consultoría mensual
+                  Acceso desde móvil/tablet
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Usuarios ilimitados
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Integración ERP
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Backup automático
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Soporte premium
-                </li>
-                <li className="flex items-center gap-2">
-                  <i className="fas fa-check text-purple-500 text-xs"></i>
-                  Funciones exclusivas
+                  Soporte técnico en tiempo real
                 </li>
               </ul>
               <button className="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors shadow-md hover:shadow-lg text-sm">
@@ -1166,15 +1134,11 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center gap-2 text-sm text-gray-700">
                 <i className="fas fa-mobile-alt text-emerald-500"></i>
-                <span>App móvil nativa</span>
+                <span>App móvil y web</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-sm text-gray-700">
                 <i className="fas fa-shield-alt text-emerald-500"></i>
-                <span>Encriptación de datos</span>
-              </div>
-              <div className="flex items-center justify-center gap-2 text-sm text-gray-700">
-                <i className="fas fa-chart-line text-emerald-500"></i>
-                <span>Dashboard en tiempo real</span>
+                <span>Resultados instantaneos</span>
               </div>
             </div>
             <p className="text-gray-600 leading-relaxed text-sm">

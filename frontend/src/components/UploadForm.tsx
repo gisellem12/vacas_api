@@ -64,7 +64,9 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             aria-describedby="file-help"
           />
           <p id="file-help" className="text-xs text-gray-500 mt-2">
-            Formatos soportados: JPEG, PNG, WebP. Tamaño máximo: 10MB
+            Formatos soportados: JPEG, PNG, WebP. Tamaño máximo: 50MB
+            <br />
+            <span className="text-emerald-600 font-medium">Las imágenes se comprimen automáticamente para una subida más rápida</span>
           </p>
         </div>
 
@@ -87,11 +89,39 @@ export const UploadForm: React.FC<UploadFormProps> = ({
 
         {/* Progress Bar */}
         {isLoading && (
-          <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-            <div 
-              className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-2 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${uploadProgress}%` }}
-            ></div>
+          <div className="space-y-3 mb-4 p-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl border border-emerald-200">
+            <div className="flex justify-between text-sm text-gray-700">
+              <span className="font-medium">
+                {uploadProgress < 20 ? "🔄 Comprimiendo imagen..." : "Procesando imagen..."}
+              </span>
+              <span className="font-bold text-emerald-600">{uploadProgress}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-4 shadow-inner">
+              <div 
+                className="bg-gradient-to-r from-emerald-500 to-blue-500 h-4 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+                style={{ width: `${uploadProgress}%` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 transform -skew-x-12 animate-bounce"></div>
+              </div>
+            </div>
+            <p className="text-xs text-gray-600 text-center font-medium">
+              {uploadProgress < 20 && "🖼️ Optimizando imagen para subida rápida..."}
+              {uploadProgress >= 20 && uploadProgress < 40 && "📤 Preparando archivo..."}
+              {uploadProgress >= 40 && uploadProgress < 70 && "🚀 Subiendo imagen..."}
+              {uploadProgress >= 70 && uploadProgress < 95 && "🤖 Analizando con IA..."}
+              {uploadProgress >= 95 && uploadProgress < 100 && "✨ Finalizando análisis..."}
+              {uploadProgress === 100 && "✅ ¡Análisis completado!"}
+            </p>
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="flex justify-center">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
