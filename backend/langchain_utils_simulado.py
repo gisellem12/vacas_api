@@ -379,15 +379,15 @@ def initialize_regression():
     global regression_a, regression_b, calibration_data
     
     # Datos de calibración inicial basados en tus ejemplos:
-    # (464kg estimado, 378kg real) --> error -86kg
+    # (464kg estimado, 378kg real) --> error -86kg (SOBRESTIMACIÓN - REMOVIDO)
     # (487kg estimado, 514kg real) --> error +27kg
     # Agregamos algunos datos más para estabilidad
     initial_data = [
-        (464, 378),  # Tu ejemplo: sobrestimación
-        (487, 514),  # Tu ejemplo: subestimación
-        (450, 400),  # Datos sintéticos para estabilidad
-        (500, 480),  # Datos sintéticos para estabilidad
-        (420, 380),  # Datos sintéticos para estabilidad
+        (487, 514),  # Tu ejemplo: subestimación (mantener)
+        (450, 420),  # Datos sintéticos para estabilidad (ajustado)
+        (500, 480),  # Datos sintéticos para estabilidad (mantener)
+        (420, 400),  # Datos sintéticos para estabilidad (ajustado)
+        (380, 360),  # Datos sintéticos para estabilidad (nuevo)
     ]
     
     calibration_data = initial_data.copy()
@@ -490,37 +490,37 @@ def entrenar_calibracion_segmentada(calibration_data):
         return (1.0, 0.0), (1.0, 0.0)
 
 def aplicar_bias_correction_factor(peso_estimado):
-    """Aplica bias correction factor ajustado para todos los rangos de peso"""
-    # Basado en análisis: el modelo subestima tanto pesos altos como bajos
+    """Aplica bias correction factor conservador para evitar sobreestimación"""
+    # Basado en análisis: el modelo está sobreestimando, necesitamos ser más conservadores
     if peso_estimado >= 500:
-        # Para pesos muy altos, corrección mínima
-        correccion = 2  # +2kg para pesos >= 500kg
+        # Para pesos muy altos, corrección hacia abajo para evitar sobreestimación
+        correccion = -10  # -10kg para pesos >= 500kg
         peso_corregido = peso_estimado + correccion
-        print(f"🎯 Bias correction alto aplicado: {peso_estimado}kg → {peso_corregido}kg (+{correccion}kg)")
+        print(f"🎯 Bias correction alto aplicado: {peso_estimado}kg → {peso_corregido}kg ({correccion:+d}kg)")
         return peso_corregido
     elif peso_estimado >= 460:
-        # Para pesos altos normales, corrección mínima
-        correccion = 1  # +1kg para pesos 460-499kg
+        # Para pesos altos normales, corrección hacia abajo
+        correccion = -5  # -5kg para pesos 460-499kg
         peso_corregido = peso_estimado + correccion
-        print(f"🎯 Bias correction aplicado: {peso_estimado}kg → {peso_corregido}kg (+{correccion}kg)")
+        print(f"🎯 Bias correction aplicado: {peso_estimado}kg → {peso_corregido}kg ({correccion:+d}kg)")
         return peso_corregido
     elif peso_estimado >= 400:
-        # Para pesos medios-altos, corrección hacia arriba
-        correccion = 0  # +0kg para pesos 400-459kg
+        # Para pesos medios-altos, corrección mínima hacia abajo
+        correccion = -2  # -2kg para pesos 400-459kg
         peso_corregido = peso_estimado + correccion
-        print(f"🎯 Bias correction medio aplicado: {peso_estimado}kg → {peso_corregido}kg (+{correccion}kg)")
+        print(f"🎯 Bias correction medio aplicado: {peso_estimado}kg → {peso_corregido}kg ({correccion:+d}kg)")
         return peso_corregido
     elif peso_estimado >= 350:
-        # Para pesos bajos medios, corrección hacia arriba
-        correccion = 15  # +15kg para pesos 350-399kg
+        # Para pesos bajos medios, corrección moderada hacia arriba
+        correccion = 5  # +5kg para pesos 350-399kg (reducido de 15kg)
         peso_corregido = peso_estimado + correccion
-        print(f"🎯 Bias correction bajo medio aplicado: {peso_estimado}kg → {peso_corregido}kg (+{correccion}kg)")
+        print(f"🎯 Bias correction bajo medio aplicado: {peso_estimado}kg → {peso_corregido}kg ({correccion:+d}kg)")
         return peso_corregido
     elif peso_estimado >= 300:
-        # Para pesos bajos, corrección más agresiva
-        correccion = 20  # +20kg para pesos 300-349kg
+        # Para pesos bajos, corrección moderada hacia arriba
+        correccion = 8  # +8kg para pesos 300-349kg (reducido de 20kg)
         peso_corregido = peso_estimado + correccion
-        print(f"🎯 Bias correction bajo aplicado: {peso_estimado}kg → {peso_corregido}kg (+{correccion}kg)")
+        print(f"🎯 Bias correction bajo aplicado: {peso_estimado}kg → {peso_corregido}kg ({correccion:+d}kg)")
         return peso_corregido
     return peso_estimado  # No tocar si no está en rango crítico
 
@@ -632,39 +632,39 @@ def corregir_peso_segmentado(peso_estimado):
         # Usar regresión para pesos bajos con corrección adicional
         peso_corregido = regression_bajos_a * peso_estimado + regression_bajos_b
         
-        # 🎯 CORRECCIÓN ADICIONAL ESPECÍFICA PARA PESOS BAJOS
+        # 🎯 CORRECCIÓN ADICIONAL ESPECÍFICA PARA PESOS BAJOS (MÁS CONSERVADORA)
         if peso_estimado >= 350:
-            # Para pesos bajos medios, aplicar corrección hacia arriba
-            factor_adicional = 1.10  # +10% para pesos 350-449kg
+            # Para pesos bajos medios, aplicar corrección moderada hacia arriba
+            factor_adicional = 1.05  # +5% para pesos 350-449kg (reducido de 10%)
             peso_corregido = peso_corregido * factor_adicional
-            print(f"🔵 Regresión bajos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+10% adicional)")
+            print(f"🔵 Regresión bajos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+5% adicional)")
         elif peso_estimado >= 300:
-            # Para pesos bajos, aplicar corrección moderada
-            factor_adicional = 1.15  # +15% para pesos 300-349kg
+            # Para pesos bajos, aplicar corrección conservadora
+            factor_adicional = 1.08  # +8% para pesos 300-349kg (reducido de 15%)
             peso_corregido = peso_corregido * factor_adicional
-            print(f"🔵 Regresión bajos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+15% adicional)")
+            print(f"🔵 Regresión bajos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+8% adicional)")
         else:
             print(f"🔵 Regresión bajos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg")
     else:
         # Usar regresión para pesos altos con factor de corrección adicional
         peso_corregido = regression_altos_a * peso_estimado + regression_altos_b
         
-        # 🎯 CORRECCIÓN ADICIONAL ESPECÍFICA PARA PESOS ALTOS (AJUSTADA)
+        # 🎯 CORRECCIÓN ADICIONAL ESPECÍFICA PARA PESOS ALTOS (MÁS CONSERVADORA)
         if peso_estimado >= 500:
-            # Para pesos muy altos, aplicar corrección hacia arriba
-            factor_adicional = 1.01  # +1% para pesos >= 500kg
+            # Para pesos muy altos, aplicar corrección mínima
+            factor_adicional = 0.98  # -2% para pesos >= 500kg (reducir sobreestimación)
             peso_corregido = peso_corregido * factor_adicional
-            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+1% adicional)")
+            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (-2% adicional)")
         elif peso_estimado >= 450:
-            # Para pesos altos normales, aplicar corrección hacia arriba
-            factor_adicional = 1.02  # +2% para pesos 450-499kg
+            # Para pesos altos normales, aplicar corrección conservadora
+            factor_adicional = 0.99  # -1% para pesos 450-499kg (reducir sobreestimación)
             peso_corregido = peso_corregido * factor_adicional
-            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+2% adicional)")
+            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (-1% adicional)")
         elif peso_estimado >= 400:
-            # Para pesos medios-altos, aplicar corrección hacia arriba
-            factor_adicional = 1.03  # +3% para pesos 400-449kg
+            # Para pesos medios-altos, aplicar corrección mínima
+            factor_adicional = 1.00  # 0% para pesos 400-449kg (sin corrección adicional)
             peso_corregido = peso_corregido * factor_adicional
-            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (+3% adicional)")
+            print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg (sin corrección adicional)")
         else:
             print(f"🔴 Regresión altos aplicada: {peso_estimado}kg → {peso_corregido:.0f}kg")
     
