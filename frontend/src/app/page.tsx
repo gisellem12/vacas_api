@@ -618,7 +618,7 @@ export default function Home() {
       </header>
 
       {/* Sección Principal con Imagen de Fondo */}
-      <section className="min-h-screen min-h-dvh bg-gradient-to-br from-white/98 to-emerald-50/30 bg-[url('https://certifiedhumanelatino.org/wp-content/uploads/2021/06/Design-sem-nome-2-1.png')] bg-cover bg-center bg-fixed flex items-center relative py-24 px-4">
+      <section className="min-h-screen min-h-dvh bg-gradient-to-br from-white/98 to-emerald-50/30 bg-[url('https://certifiedhumanelatino.org/wp-content/uploads/2021/06/Design-sem-nome-2-1.png')] bg-contain md:bg-cover bg-center md:bg-center bg-no-repeat md:bg-fixed flex items-center relative py-24 px-4">
         {/* Overlay adicional con gradiente diagonal */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-emerald-50/15 z-1"></div> 
         
@@ -933,7 +933,7 @@ export default function Home() {
                         Subir Imagen de Ganado
                       </h4>
                       <p className="text-gray-700 mb-2">Haz clic aquí para seleccionar una imagen o arrastra y suelta</p>
-                      <p className="text-sm text-gray-500">Formatos soportados: JPG, PNG, WEBP (Máx. 10MB)</p>
+                      <p className="text-sm text-gray-500">Formatos soportados: JPG, PNG, WEBP (Máx. 50MB)</p>
                     </>
                   )}
                 </div>
