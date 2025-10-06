@@ -1277,7 +1277,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Información de Contacto</h3>
               <div className="text-gray-600 text-left space-y-2">
-                <p className="text-sm"><strong>Email:</strong> agrotechvision@gmail.com</p>
+                <p className="text-sm"><strong>Email:</strong> agrotechvisionpy@gmail.com</p>
                 <p className="text-sm"><strong>Teléfono:</strong> +595 971 760 011</p>
                 <p className="text-sm"><strong>Dirección:</strong> Av. Ganadera 123, Asunción</p>
                 <p className="text-sm"><strong>Horario:</strong> Lun-Vie 7:00 - 17:00</p>
