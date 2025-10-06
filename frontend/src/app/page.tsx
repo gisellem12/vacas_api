@@ -619,7 +619,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <i className="fas fa-bullseye text-2xl text-emerald-500"></i>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Precisión del 97%</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Precisión del 94%</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Comparable a básculas tradicionales con tecnología de vanguardia.
               </p>
