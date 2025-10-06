@@ -24,6 +24,8 @@ export default function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{name: string, email: string} | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -175,8 +177,14 @@ export default function Home() {
 
         const data = await response.json();
         if (response.ok) {
-          showNotification('✅ ¡Inicio de sesión exitoso!', 'success');
+          showNotification(`✅ Bienvenido ${data.user?.name || data.user?.email}`, 'success');
+          setIsAuthenticated(true);
+          setUser({
+            name: data.user?.name || data.user?.email,
+            email: data.user?.email
+          });
           setShowLoginModal(false);
+          setMobileMenuOpen(false); // Cerrar menú móvil al hacer login exitoso
           // Reset del formulario de manera segura
           try {
             if (e.currentTarget) {
@@ -348,8 +356,14 @@ export default function Home() {
       
       if (backendResponse.ok) {
         showNotification(`✅ Bienvenido ${userData.user?.name || userData.user?.email}`, 'success');
+        setIsAuthenticated(true);
+        setUser({
+          name: userData.user?.name || userData.user?.email,
+          email: userData.user?.email
+        });
         setShowLoginModal(false);
         setShowRegisterModal(false);
+        setMobileMenuOpen(false); // Cerrar menú móvil al hacer login exitoso
         // Aquí podrías guardar el token en localStorage o en el estado global
         // localStorage.setItem('authToken', userData.token);
       } else {
@@ -359,6 +373,15 @@ export default function Home() {
       console.error('Error al procesar respuesta de Google:', error);
       showNotification('❌ Error al iniciar sesión con Google', 'error');
     }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+    setMobileMenuOpen(false); // Cerrar menú móvil al hacer logout
+    showNotification('👋 ¡Hasta luego!', 'success');
+    // Aquí podrías limpiar el token del localStorage si lo guardaste
+    // localStorage.removeItem('authToken');
   };
 
   return (
@@ -491,9 +514,40 @@ export default function Home() {
               AgroTech
             </a>
             
-            <button className="md:hidden p-1 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-            </button>
+            {/* Botones de autenticación para móvil en el header */}
+            <div className="md:hidden flex items-center gap-2">
+              {isAuthenticated && user ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-emerald-600 hidden sm:block">
+                    ¡Hola, {user.name}!
+                  </span>
+                  <button 
+                    onClick={handleLogout}
+                    className="bg-gray-100 text-gray-700 py-1 px-3 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors border border-gray-300"
+                  >
+                    Salir
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <button 
+                    onClick={() => setShowLoginModal(true)}
+                    className="bg-gray-100 text-gray-700 py-1 px-2 rounded text-sm font-semibold hover:bg-gray-200 transition-colors"
+                  >
+                    Entrar
+                  </button>
+                  <button 
+                    onClick={() => setShowRegisterModal(true)}
+                    className="bg-emerald-500 text-white py-1 px-2 rounded text-sm font-semibold hover:bg-emerald-600 transition-colors"
+                  >
+                    Reg.
+                  </button>
+                </div>
+              )}
+              <button className="p-1 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+              </button>
+            </div>
             
             <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-1 md:gap-8`}>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'inicio' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
@@ -502,11 +556,62 @@ export default function Home() {
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'planes' ? 'bg-emerald-50 text-emerald-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
+              
+              {/* Botones de autenticación para móvil */}
+              <div className="md:hidden flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
+                {isAuthenticated && user ? (
+                  <div className="flex flex-col gap-3">
+                    <div className="bg-emerald-50 rounded-lg p-3 text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <i className="fas fa-user-circle text-emerald-500 text-xl"></i>
+                        <span className="text-emerald-700 font-semibold text-lg">
+                          ¡Hola, {user.name}!
+                        </span>
+                      </div>
+                      <p className="text-emerald-600 text-sm">{user.email}</p>
+                    </div>
+                    <button 
+                      onClick={handleLogout}
+                      className="bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300 flex items-center justify-center gap-2"
+                    >
+                      <i className="fas fa-sign-out-alt"></i>
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <a href="#" className="bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300 text-center flex items-center justify-center gap-2" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>
+                      <i className="fas fa-sign-in-alt"></i>
+                      Entrar
+                    </a>
+                    <a href="#" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg text-center flex items-center justify-center gap-2" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>
+                      <i className="fas fa-user-plus"></i>
+                      Registrarse
+                    </a>
+                  </>
+                )}
+              </div>
             </nav>
             
-        <div className="hidden md:flex gap-3">
-          <a href="#" className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>Entrar</a>
-          <a href="#" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>Registrarse</a>
+        <div className="hidden md:flex gap-3 items-center">
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-gray-700 font-semibold">
+                ¡Hola, {user.name}!
+              </span>
+              <button 
+                onClick={handleLogout}
+                className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300"
+              >
+                Cerrar Sesión
+              </button>
+            </div>
+          ) : (
+            <>
+              <a href="#" className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>Entrar</a>
+              <a href="#" className="bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>Registrarse</a>
+            </>
+          )}
         </div>
           </div>
         </div>
@@ -1172,8 +1277,8 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Información de Contacto</h3>
               <div className="text-gray-600 text-left space-y-2">
-                <p className="text-sm"><strong>Email:</strong> soporte@agrotechvision.com</p>
-                <p className="text-sm"><strong>Teléfono:</strong> +595 981 123 456</p>
+                <p className="text-sm"><strong>Email:</strong> agrotechvision@gmail.com</p>
+                <p className="text-sm"><strong>Teléfono:</strong> +595 971 760 011</p>
                 <p className="text-sm"><strong>Dirección:</strong> Av. Ganadera 123, Asunción</p>
                 <p className="text-sm"><strong>Horario:</strong> Lun-Vie 7:00 - 17:00</p>
               </div>
