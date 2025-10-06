@@ -64,7 +64,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             aria-describedby="file-help"
           />
           <p id="file-help" className="text-xs text-gray-500 mt-2">
-            Formatos soportados: JPEG, PNG, WebP. Tamaño máximo: 50MB
+            Formatos soportados: JPEG, PNG, WebP. Tamaño máximo: 20MB
             <br />
             <span className="text-emerald-600 font-medium">Las imágenes se comprimen automáticamente para una subida más rápida</span>
           </p>

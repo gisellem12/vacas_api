@@ -323,8 +323,8 @@ async def predict_file(file: UploadFile = File(...)):
     if not file.content_type or not file.content_type.startswith('image/'):
         raise HTTPException(status_code=400, detail="El archivo debe ser una imagen")
     
-    # Verificar tamaño del archivo (50MB máximo)
-    MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+    # Verificar tamaño del archivo (20MB máximo)
+    MAX_FILE_SIZE = 20 * 1024 * 1024  # 20MB
     if file.size and file.size > MAX_FILE_SIZE:
         raise HTTPException(status_code=413, detail=f"El archivo es demasiado grande. Máximo permitido: {MAX_FILE_SIZE // (1024 * 1024)}MB")
     

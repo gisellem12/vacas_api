@@ -51,8 +51,8 @@ export default function Home() {
       return;
     }
     
-    if (file.size > 50 * 1024 * 1024) {
-      alert('❌ La imagen debe ser menor a 50MB');
+    if (file.size > 20 * 1024 * 1024) {
+      alert('❌ La imagen debe ser menor a 20MB');
       return;
     }
     
@@ -933,7 +933,7 @@ export default function Home() {
                         Subir Imagen de Ganado
                       </h4>
                       <p className="text-gray-700 mb-2">Haz clic aquí para seleccionar una imagen o arrastra y suelta</p>
-                      <p className="text-sm text-gray-500">Formatos soportados: JPG, PNG, WEBP (Máx. 50MB)</p>
+                      <p className="text-sm text-gray-500">Formatos soportados: JPG, PNG, WEBP (Máx. 20MB)</p>
                     </>
                   )}
                 </div>

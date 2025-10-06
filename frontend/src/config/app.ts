@@ -1,7 +1,7 @@
 // Configuración de la aplicación
 export const APP_CONFIG = {
   API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
-  MAX_FILE_SIZE: 50 * 1024 * 1024, // 50MB
+  MAX_FILE_SIZE: 20 * 1024 * 1024, // 20MB
   ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   UPLOAD_PROGRESS_INTERVAL: 200, // ms
   UPLOAD_TIMEOUT: 300000, // 5 minutos para archivos grandes
