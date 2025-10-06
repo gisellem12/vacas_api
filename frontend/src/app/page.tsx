@@ -561,7 +561,7 @@ export default function Home() {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">97%</span>
+              <span className="text-3xl md:text-4xl font-bold text-emerald-600 block mb-2">94%</span>
               <span className="text-sm text-gray-600 font-medium">Precisión</span>
             </div>
             <div className="text-center">
@@ -1062,6 +1062,10 @@ export default function Home() {
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
                   Hasta 3 usuarios
+                </li>
+                <li className="flex items-center gap-2">
+                  <i className="fas fa-check text-blue-500 text-xs"></i>
+                  Recomendaciones personalizadas
                 </li>
                 <li className="flex items-center gap-2">
                   <i className="fas fa-check text-blue-500 text-xs"></i>
