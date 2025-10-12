@@ -873,6 +873,38 @@ PRECISION_IMPROVEMENTS = {
     'performance_history': []  # Historial de rendimiento
 }
 
+def calculate_body_measurement_similarity(dataset_measurements, input_measurements):
+    """Calcular similitud entre medidas corporales"""
+    if not dataset_measurements or not input_measurements:
+        return 0
+    
+    similarity_score = 0
+    total_measurements = 0
+    
+    # Medidas a comparar
+    measurements_to_compare = [
+        'heart_girth_cm',
+        'oblique_length_cm', 
+        'withers_height_cm',
+        'hip_length_cm'
+    ]
+    
+    for measurement in measurements_to_compare:
+        if measurement in dataset_measurements and measurement in input_measurements:
+            dataset_value = dataset_measurements[measurement]
+            input_value = input_measurements[measurement]
+            
+            # Calcular diferencia relativa
+            if dataset_value > 0:
+                relative_diff = abs(dataset_value - input_value) / dataset_value
+                # Convertir a similitud (menor diferencia = mayor similitud)
+                measurement_similarity = max(0, 1 - relative_diff)
+                similarity_score += measurement_similarity
+                total_measurements += 1
+    
+    # Retornar similitud promedio
+    return similarity_score / total_measurements if total_measurements > 0 else 0
+
 def load_dataset_reference():
     """Carga el dataset de referencia para estimaciones precisas"""
     global DATASET_REFERENCE
@@ -881,7 +913,12 @@ def load_dataset_reference():
         if os.path.exists(dataset_path):
             with open(dataset_path, 'r', encoding='utf-8') as f:
                 DATASET_REFERENCE = json.load(f)
-            print(f"✅ Dataset cargado: {len(DATASET_REFERENCE.get('images', []))} imágenes de referencia")
+            
+            total_images = len(DATASET_REFERENCE.get('images', []))
+            real_measurements = len([img for img in DATASET_REFERENCE.get('images', []) if img.get('has_real_measurements')])
+            
+            print(f"✅ Dataset integrado cargado: {total_images} imágenes de referencia")
+            print(f"📊 Imágenes con medidas reales: {real_measurements}")
             return True
         else:
             print("⚠️ Dataset no encontrado, usando estimación básica")
@@ -891,7 +928,7 @@ def load_dataset_reference():
         return False
 
 def estimate_weight_from_dataset(image_characteristics):
-    """Estima peso basado en similitud con el dataset de referencia"""
+    """Estima peso basado en similitud con el dataset de referencia mejorado"""
     global DATASET_REFERENCE
     
     if not DATASET_REFERENCE:
@@ -927,6 +964,18 @@ def estimate_weight_from_dataset(image_characteristics):
         if ratio_diff < 0.2:  # Similar aspect ratio
             similarity_score += 1
         
+        # NUEVO: Comparar medidas corporales si están disponibles
+        if img_data.get('has_real_measurements') and image_characteristics.get('body_measurements'):
+            body_similarity = calculate_body_measurement_similarity(
+                img_data.get('body_measurements', {}),
+                image_characteristics.get('body_measurements', {})
+            )
+            similarity_score += body_similarity * 3  # Peso alto para medidas corporales
+        
+        # Priorizar imágenes con medidas reales
+        if img_data.get('has_real_measurements'):
+            similarity_score += 2
+        
         if similarity_score > 0:
             similar_images.append({
                 'weight': img_data.get('weight_estimate', 400),
@@ -934,7 +983,10 @@ def estimate_weight_from_dataset(image_characteristics):
                 'similarity': similarity_score,
                 'real_weight': img_data.get('real_weight'),
                 'ai_estimate': img_data.get('ai_estimate'),
-                'error': img_data.get('error', 0)
+                'error': img_data.get('error', 0),
+                'has_real_measurements': img_data.get('has_real_measurements', False),
+                'body_measurements': img_data.get('body_measurements', {}),
+                'view_angle': img_data.get('view_angle', 'unknown')
             })
     
     if not similar_images:

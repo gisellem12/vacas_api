@@ -6,6 +6,6 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://tu-backend.railway.app"
+    "NEXT_PUBLIC_API_URL": "https://vacasapi-production.up.railway.app"
   }
 }

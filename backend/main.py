@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Depends
+from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Depends, Header
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import requests
@@ -201,6 +201,40 @@ async def register(request: RegisterRequest):
             success=False,
             message=f"Error en registro: {str(e)}"
         )
+
+@app.post("/verify-token")
+async def verify_token_endpoint(authorization: str = Header(None)):
+    """Endpoint para verificar si un token JWT es válido"""
+    try:
+        if not authorization or not authorization.startswith("Bearer "):
+            return {"valid": False, "message": "Token no proporcionado"}
+        
+        token = authorization.split(" ")[1]
+        
+        # Verificar token
+        payload = verify_token(token)
+        if not payload:
+            return {"valid": False, "message": "Token inválido o expirado"}
+        
+        # Obtener datos del usuario
+        user_email = payload.get("sub")
+        if not user_email:
+            return {"valid": False, "message": "Token inválido"}
+        
+        user = get_user_by_email(user_email)
+        if not user:
+            return {"valid": False, "message": "Usuario no encontrado"}
+        
+        return {
+            "valid": True,
+            "email": user["email"],
+            "name": user["name"],
+            "login_method": user["login_method"]
+        }
+        
+    except Exception as e:
+        print(f"❌ Error verificando token: {e}")
+        return {"valid": False, "message": "Error interno del servidor"}
 
 @app.get("/me", response_model=UserResponse)
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):

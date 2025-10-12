@@ -30,9 +30,9 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result }) => {
           <div className="text-xs font-bold text-amber-700 uppercase tracking-wide mb-2">Peso</div>
           <div className="text-xl font-bold text-amber-800" aria-label={`Peso: ${result.peso} kilogramos`}>{result.peso} kg</div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl text-center border border-blue-200">
-          <div className="text-xs font-bold text-blue-700 uppercase tracking-wide mb-2">Precio</div>
-          <div className="text-xl font-bold text-blue-800 capitalize" aria-label={`Precio: ${result.precio}`}>{result.precio}</div>
+        <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-4 rounded-xl text-center border border-stone-200">
+          <div className="text-xs font-bold text-stone-700 uppercase tracking-wide mb-2">Precio</div>
+          <div className="text-xl font-bold text-stone-800 capitalize" aria-label={`Precio: ${result.precio}`}>{result.precio}</div>
         </div>
         <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl text-center border border-green-200">
           <div className="text-xs font-bold text-green-700 uppercase tracking-wide mb-2">Recomendaciones</div>
@@ -56,10 +56,10 @@ export const VeterinaryRecommendationsDisplay: React.FC<VeterinaryRecommendation
     <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mt-6" role="region" aria-label="Recomendaciones veterinarias">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-bold text-gray-900 flex items-center">
-          <i className="fas fa-user-md mr-3 text-emerald-600" aria-hidden="true"></i>
+          <i className="fas fa-user-md mr-3 text-amber-600" aria-hidden="true"></i>
           Recomendaciones
         </h3>
-        <div className="bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-full text-sm font-medium flex items-center">
+        <div className="bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium flex items-center">
           <i className="fas fa-robot mr-1.5" aria-hidden="true"></i>
           Confianza: 94%
         </div>
@@ -67,7 +67,7 @@ export const VeterinaryRecommendationsDisplay: React.FC<VeterinaryRecommendation
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Nutrición */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl border border-green-200">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200">
           <h4 className="font-bold text-green-800 mb-4 flex items-center text-lg">
             <i className="fas fa-seedling mr-2 text-green-600" aria-hidden="true"></i>
             Nutrición
@@ -83,15 +83,15 @@ export const VeterinaryRecommendationsDisplay: React.FC<VeterinaryRecommendation
         </div>
 
         {/* Manejo */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-blue-200">
-          <h4 className="font-bold text-blue-800 mb-4 flex items-center text-lg">
-            <i className="fas fa-cogs mr-2 text-blue-600" aria-hidden="true"></i>
+        <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-5 rounded-xl border border-stone-200">
+          <h4 className="font-bold text-stone-800 mb-4 flex items-center text-lg">
+            <i className="fas fa-cogs mr-2 text-stone-600" aria-hidden="true"></i>
             Manejo
           </h4>
           <ul className="space-y-3">
             {recommendations.manejo.map((rec, index) => (
               <li key={index} className="text-sm text-gray-700 flex items-start">
-                <i className="fas fa-check-circle mr-3 mt-0.5 text-blue-500 flex-shrink-0" aria-hidden="true"></i>
+                <i className="fas fa-check-circle mr-3 mt-0.5 text-stone-600 flex-shrink-0" aria-hidden="true"></i>
                 <span className="leading-relaxed">{rec}</span>
               </li>
             ))}

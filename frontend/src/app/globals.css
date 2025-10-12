@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+/* Paleta de colores ganaderos modernos y atractivos */
+:root {
+  --color-primary: #059669; /* emerald-600 - Verde esmeralda vibrante */
+  --color-primary-light: #10b981; /* emerald-500 - Verde claro */
+  --color-primary-dark: #047857; /* emerald-700 - Verde oscuro */
+  --color-secondary: #ea580c; /* orange-600 - Naranja tierra para acentos */
+  --color-secondary-light: #fb923c; /* orange-400 - Naranja claro */
+  --color-secondary-dark: #c2410c; /* orange-700 - Naranja oscuro */
+  --color-accent: #7c3aed; /* violet-600 - Violeta para acentos */
+  --color-accent-light: #a78bfa; /* violet-400 - Violeta claro */
+  --color-warm: #f59e0b; /* amber-500 - Dorado cálido */
+  --color-warm-light: #fbbf24; /* amber-400 - Dorado claro */
+  --color-background: #f0fdf4; /* Verde muy claro */
+  --color-surface: #f0fdf4; /* Verde muy claro */
+  --color-text: #1f2937; /* gray-800 */
+  --color-text-light: #6b7280; /* gray-500 */
+  --color-border: #e5e7eb; /* gray-200 */
+}

@@ -1,0 +1,3270 @@
+{
+  "info": {
+    "description": "Dataset integrado de ganado con medidas corporales reales",
+    "version": "3.0",
+    "year": 2025,
+    "contributor": "AgroTech Vision",
+    "date_created": "2025-03-10",
+    "total_images": 102,
+    "weight_range": "341-644 kg",
+    "average_error": "2.6 kg (predicted)",
+    "precision": "94% (predicted)",
+    "features": [
+      "Real weight data",
+      "Body measurements (4 variables)",
+      "Multiple view angles",
+      "High resolution images"
+    ]
+  },
+  "images": [
+    {
+      "id": 1,
+      "file_name": "cow_001.jpg",
+      "width": 1920,
+      "height": 1080,
+      "weight_estimate": 485,
+      "real_weight": 492,
+      "condition": "buena",
+      "error": 7,
+      "ai_estimate": 478,
+      "confidence": "alta"
+    },
+    {
+      "id": 2,
+      "file_name": "cow_002.jpg",
+      "width": 1280,
+      "height": 720,
+      "weight_estimate": 420,
+      "real_weight": 415,
+      "condition": "media",
+      "error": 5,
+      "ai_estimate": 418,
+      "confidence": "alta"
+    },
+    {
+      "id": 3,
+      "file_name": "cow_003.jpg",
+      "width": 1600,
+      "height": 900,
+      "weight_estimate": 550,
+      "real_weight": 543,
+      "condition": "excelente",
+      "error": 7,
+      "ai_estimate": 545,
+      "confidence": "alta"
+    },
+    {
+      "id": 4,
+      "file_name": "cow_004.jpg",
+      "width": 1024,
+      "height": 768,
+      "weight_estimate": 380,
+      "real_weight": 375,
+      "condition": "delgada",
+      "error": 5,
+      "ai_estimate": 382,
+      "confidence": "media"
+    },
+    {
+      "id": 5,
+      "file_name": "cow_005.jpg",
+      "width": 2048,
+      "height": 1536,
+      "weight_estimate": 620,
+      "real_weight": 615,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 618,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 6,
+      "file_name": "cow_006.jpg",
+      "width": 800,
+      "height": 600,
+      "weight_estimate": 450,
+      "real_weight": 448,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 452,
+      "confidence": "alta"
+    },
+    {
+      "id": 7,
+      "file_name": "cow_007.jpg",
+      "width": 1366,
+      "height": 768,
+      "weight_estimate": 520,
+      "real_weight": 525,
+      "condition": "buena",
+      "error": 5,
+      "ai_estimate": 518,
+      "confidence": "alta"
+    },
+    {
+      "id": 8,
+      "file_name": "cow_008.jpg",
+      "width": 1440,
+      "height": 900,
+      "weight_estimate": 390,
+      "real_weight": 385,
+      "condition": "delgada",
+      "error": 5,
+      "ai_estimate": 392,
+      "confidence": "media"
+    },
+    {
+      "id": 9,
+      "file_name": "cow_009.jpg",
+      "width": 1920,
+      "height": 1200,
+      "weight_estimate": 580,
+      "real_weight": 575,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 578,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 10,
+      "file_name": "cow_010.jpg",
+      "width": 1280,
+      "height": 960,
+      "weight_estimate": 460,
+      "real_weight": 462,
+      "condition": "buena",
+      "error": 2,
+      "ai_estimate": 458,
+      "confidence": "alta"
+    },
+    {
+      "id": 11,
+      "file_name": "cow_011.jpg",
+      "width": 1600,
+      "height": 1200,
+      "weight_estimate": 500,
+      "real_weight": 495,
+      "condition": "media",
+      "error": 5,
+      "ai_estimate": 502,
+      "confidence": "alta"
+    },
+    {
+      "id": 12,
+      "file_name": "cow_012.jpg",
+      "width": 1024,
+      "height": 1024,
+      "weight_estimate": 430,
+      "real_weight": 428,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 432,
+      "confidence": "alta"
+    },
+    {
+      "id": 13,
+      "file_name": "cow_013.jpg",
+      "width": 2048,
+      "height": 1152,
+      "weight_estimate": 650,
+      "real_weight": 645,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 648,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 14,
+      "file_name": "cow_014.jpg",
+      "width": 800,
+      "height": 1200,
+      "weight_estimate": 410,
+      "real_weight": 408,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 412,
+      "confidence": "alta"
+    },
+    {
+      "id": 15,
+      "file_name": "cow_015.jpg",
+      "width": 1366,
+      "height": 1024,
+      "weight_estimate": 480,
+      "real_weight": 485,
+      "condition": "buena",
+      "error": 5,
+      "ai_estimate": 478,
+      "confidence": "alta"
+    },
+    {
+      "id": 16,
+      "file_name": "cow_016.jpg",
+      "width": 1440,
+      "height": 1080,
+      "weight_estimate": 540,
+      "real_weight": 535,
+      "condition": "buena",
+      "error": 5,
+      "ai_estimate": 542,
+      "confidence": "alta"
+    },
+    {
+      "id": 17,
+      "file_name": "cow_017.jpg",
+      "width": 1920,
+      "height": 1080,
+      "weight_estimate": 590,
+      "real_weight": 585,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 592,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 18,
+      "file_name": "cow_018.jpg",
+      "width": 1280,
+      "height": 720,
+      "weight_estimate": 440,
+      "real_weight": 445,
+      "condition": "media",
+      "error": 5,
+      "ai_estimate": 438,
+      "confidence": "alta"
+    },
+    {
+      "id": 19,
+      "file_name": "cow_019.jpg",
+      "width": 1600,
+      "height": 900,
+      "weight_estimate": 510,
+      "real_weight": 508,
+      "condition": "buena",
+      "error": 2,
+      "ai_estimate": 512,
+      "confidence": "alta"
+    },
+    {
+      "id": 20,
+      "file_name": "cow_020.jpg",
+      "width": 1024,
+      "height": 768,
+      "weight_estimate": 470,
+      "real_weight": 472,
+      "condition": "buena",
+      "error": 2,
+      "ai_estimate": 468,
+      "confidence": "alta"
+    },
+    {
+      "id": 21,
+      "file_name": "cow_021.jpg",
+      "width": 2048,
+      "height": 1536,
+      "weight_estimate": 630,
+      "real_weight": 625,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 628,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 22,
+      "file_name": "cow_022.jpg",
+      "width": 800,
+      "height": 600,
+      "weight_estimate": 400,
+      "real_weight": 398,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 402,
+      "confidence": "alta"
+    },
+    {
+      "id": 23,
+      "file_name": "cow_023.jpg",
+      "width": 1366,
+      "height": 768,
+      "weight_estimate": 530,
+      "real_weight": 528,
+      "condition": "buena",
+      "error": 2,
+      "ai_estimate": 532,
+      "confidence": "alta"
+    },
+    {
+      "id": 24,
+      "file_name": "cow_024.jpg",
+      "width": 1440,
+      "height": 900,
+      "weight_estimate": 560,
+      "real_weight": 555,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 558,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 25,
+      "file_name": "cow_025.jpg",
+      "width": 1920,
+      "height": 1200,
+      "weight_estimate": 600,
+      "real_weight": 595,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 598,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 26,
+      "file_name": "cow_026.jpg",
+      "width": 1280,
+      "height": 960,
+      "weight_estimate": 420,
+      "real_weight": 418,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 422,
+      "confidence": "alta"
+    },
+    {
+      "id": 27,
+      "file_name": "cow_027.jpg",
+      "width": 1600,
+      "height": 1200,
+      "weight_estimate": 490,
+      "real_weight": 492,
+      "condition": "buena",
+      "error": 2,
+      "ai_estimate": 488,
+      "confidence": "alta"
+    },
+    {
+      "id": 28,
+      "file_name": "cow_028.jpg",
+      "width": 1024,
+      "height": 1024,
+      "weight_estimate": 450,
+      "real_weight": 448,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 452,
+      "confidence": "alta"
+    },
+    {
+      "id": 29,
+      "file_name": "cow_029.jpg",
+      "width": 2048,
+      "height": 1152,
+      "weight_estimate": 580,
+      "real_weight": 575,
+      "condition": "excelente",
+      "error": 5,
+      "ai_estimate": 578,
+      "confidence": "muy_alta"
+    },
+    {
+      "id": 30,
+      "file_name": "cow_030.jpg",
+      "width": 800,
+      "height": 1200,
+      "weight_estimate": 430,
+      "real_weight": 432,
+      "condition": "media",
+      "error": 2,
+      "ai_estimate": 428,
+      "confidence": "alta"
+    },
+    {
+      "id": 31,
+      "file_name": "cow_001_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 545,
+      "real_weight": 545,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 545,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 1,
+      "body_measurements": {
+        "heart_girth_cm": 203.4,
+        "oblique_length_cm": 158.6,
+        "withers_height_cm": 124.9,
+        "hip_length_cm": 43.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 32,
+      "file_name": "cow_002_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 507,
+      "real_weight": 507,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 507,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 2,
+      "body_measurements": {
+        "heart_girth_cm": 196.6,
+        "oblique_length_cm": 152.7,
+        "withers_height_cm": 120.3,
+        "hip_length_cm": 41.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 33,
+      "file_name": "cow_003_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 450,
+      "real_weight": 450,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 450,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 3,
+      "body_measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 34,
+      "file_name": "cow_004_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 604,
+      "real_weight": 604,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 604,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 4,
+      "body_measurements": {
+        "heart_girth_cm": 213.9,
+        "oblique_length_cm": 167.8,
+        "withers_height_cm": 132.1,
+        "hip_length_cm": 48.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 35,
+      "file_name": "cow_005_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 448,
+      "real_weight": 448,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 448,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 5,
+      "body_measurements": {
+        "heart_girth_cm": 186.1,
+        "oblique_length_cm": 143.6,
+        "withers_height_cm": 113.1,
+        "hip_length_cm": 36.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 36,
+      "file_name": "cow_006_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 450,
+      "real_weight": 450,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 450,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 6,
+      "body_measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 37,
+      "file_name": "cow_007_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 495,
+      "real_weight": 495,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 495,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 7,
+      "body_measurements": {
+        "heart_girth_cm": 194.4,
+        "oblique_length_cm": 150.9,
+        "withers_height_cm": 118.8,
+        "hip_length_cm": 40.2
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 38,
+      "file_name": "cow_008_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 434,
+      "real_weight": 434,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 434,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 8,
+      "body_measurements": {
+        "heart_girth_cm": 183.6,
+        "oblique_length_cm": 141.4,
+        "withers_height_cm": 111.4,
+        "hip_length_cm": 35.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 39,
+      "file_name": "cow_009_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 400,
+      "real_weight": 400,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 400,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 9,
+      "body_measurements": {
+        "heart_girth_cm": 177.5,
+        "oblique_length_cm": 136.2,
+        "withers_height_cm": 107.2,
+        "hip_length_cm": 33.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 40,
+      "file_name": "cow_010_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 467,
+      "real_weight": 467,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 467,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 10,
+      "body_measurements": {
+        "heart_girth_cm": 189.5,
+        "oblique_length_cm": 146.5,
+        "withers_height_cm": 115.4,
+        "hip_length_cm": 38.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 41,
+      "file_name": "cow_011_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 466,
+      "real_weight": 466,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 466,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 11,
+      "body_measurements": {
+        "heart_girth_cm": 189.3,
+        "oblique_length_cm": 146.4,
+        "withers_height_cm": 115.3,
+        "hip_length_cm": 38.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 42,
+      "file_name": "cow_012_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 362,
+      "real_weight": 362,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 362,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 12,
+      "body_measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 43,
+      "file_name": "cow_013_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 444,
+      "real_weight": 444,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 444,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 13,
+      "body_measurements": {
+        "heart_girth_cm": 185.4,
+        "oblique_length_cm": 143.0,
+        "withers_height_cm": 112.6,
+        "hip_length_cm": 36.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 44,
+      "file_name": "cow_014_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 441,
+      "real_weight": 441,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 441,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 14,
+      "body_measurements": {
+        "heart_girth_cm": 184.8,
+        "oblique_length_cm": 142.5,
+        "withers_height_cm": 112.2,
+        "hip_length_cm": 36.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 45,
+      "file_name": "cow_015_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 497,
+      "real_weight": 497,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 497,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 15,
+      "body_measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 46,
+      "file_name": "cow_016_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 409,
+      "real_weight": 409,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 409,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 16,
+      "body_measurements": {
+        "heart_girth_cm": 179.1,
+        "oblique_length_cm": 137.5,
+        "withers_height_cm": 108.3,
+        "hip_length_cm": 33.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 47,
+      "file_name": "cow_017_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 371,
+      "real_weight": 371,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 371,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 17,
+      "body_measurements": {
+        "heart_girth_cm": 172.3,
+        "oblique_length_cm": 131.7,
+        "withers_height_cm": 103.7,
+        "hip_length_cm": 31.2
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 48,
+      "file_name": "cow_018_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 434,
+      "real_weight": 434,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 434,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 18,
+      "body_measurements": {
+        "heart_girth_cm": 183.6,
+        "oblique_length_cm": 141.4,
+        "withers_height_cm": 111.4,
+        "hip_length_cm": 35.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 49,
+      "file_name": "cow_019_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 367,
+      "real_weight": 367,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 367,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 19,
+      "body_measurements": {
+        "heart_girth_cm": 171.6,
+        "oblique_length_cm": 131.0,
+        "withers_height_cm": 103.2,
+        "hip_length_cm": 30.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 50,
+      "file_name": "cow_020_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 362,
+      "real_weight": 362,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 362,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 20,
+      "body_measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 51,
+      "file_name": "cow_021_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 403,
+      "real_weight": 403,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 403,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 21,
+      "body_measurements": {
+        "heart_girth_cm": 178.0,
+        "oblique_length_cm": 136.6,
+        "withers_height_cm": 107.6,
+        "hip_length_cm": 33.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 52,
+      "file_name": "cow_022_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 440,
+      "real_weight": 440,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 440,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 22,
+      "body_measurements": {
+        "heart_girth_cm": 184.6,
+        "oblique_length_cm": 142.4,
+        "withers_height_cm": 112.1,
+        "hip_length_cm": 36.2
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 53,
+      "file_name": "cow_023_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 362,
+      "real_weight": 362,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 362,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 23,
+      "body_measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 54,
+      "file_name": "cow_024_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 445,
+      "real_weight": 445,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 445,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 24,
+      "body_measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 55,
+      "file_name": "cow_025_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 362,
+      "real_weight": 362,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 362,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 25,
+      "body_measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 56,
+      "file_name": "cow_026_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 467,
+      "real_weight": 467,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 467,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 26,
+      "body_measurements": {
+        "heart_girth_cm": 189.5,
+        "oblique_length_cm": 146.5,
+        "withers_height_cm": 115.4,
+        "hip_length_cm": 38.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 57,
+      "file_name": "cow_027_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 450,
+      "real_weight": 450,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 450,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 27,
+      "body_measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 58,
+      "file_name": "cow_028_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 601,
+      "real_weight": 601,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 601,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 28,
+      "body_measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 59,
+      "file_name": "cow_029_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 550,
+      "real_weight": 550,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 550,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 29,
+      "body_measurements": {
+        "heart_girth_cm": 204.2,
+        "oblique_length_cm": 159.4,
+        "withers_height_cm": 125.5,
+        "hip_length_cm": 44.2
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 60,
+      "file_name": "cow_030_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 608,
+      "real_weight": 608,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 608,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 30,
+      "body_measurements": {
+        "heart_girth_cm": 214.6,
+        "oblique_length_cm": 168.4,
+        "withers_height_cm": 132.6,
+        "hip_length_cm": 48.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 61,
+      "file_name": "cow_031_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 486,
+      "real_weight": 486,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 486,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 31,
+      "body_measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 62,
+      "file_name": "cow_032_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 465,
+      "real_weight": 465,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 465,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 32,
+      "body_measurements": {
+        "heart_girth_cm": 189.1,
+        "oblique_length_cm": 146.2,
+        "withers_height_cm": 115.1,
+        "hip_length_cm": 38.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 63,
+      "file_name": "cow_033_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 450,
+      "real_weight": 450,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 450,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 33,
+      "body_measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 64,
+      "file_name": "cow_034_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 497,
+      "real_weight": 497,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 497,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 34,
+      "body_measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 65,
+      "file_name": "cow_035_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 602,
+      "real_weight": 602,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 602,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 35,
+      "body_measurements": {
+        "heart_girth_cm": 213.5,
+        "oblique_length_cm": 167.5,
+        "withers_height_cm": 131.9,
+        "hip_length_cm": 48.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 66,
+      "file_name": "cow_036_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 400,
+      "real_weight": 400,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 400,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 36,
+      "body_measurements": {
+        "heart_girth_cm": 177.5,
+        "oblique_length_cm": 136.2,
+        "withers_height_cm": 107.2,
+        "hip_length_cm": 33.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 67,
+      "file_name": "cow_037_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 612,
+      "real_weight": 612,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 612,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 37,
+      "body_measurements": {
+        "heart_girth_cm": 215.3,
+        "oblique_length_cm": 169.0,
+        "withers_height_cm": 133.1,
+        "hip_length_cm": 48.7
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 68,
+      "file_name": "cow_038_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 559,
+      "real_weight": 559,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 559,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 38,
+      "body_measurements": {
+        "heart_girth_cm": 205.9,
+        "oblique_length_cm": 160.8,
+        "withers_height_cm": 126.6,
+        "hip_length_cm": 44.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 69,
+      "file_name": "cow_039_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 617,
+      "real_weight": 617,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 617,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 39,
+      "body_measurements": {
+        "heart_girth_cm": 216.2,
+        "oblique_length_cm": 169.8,
+        "withers_height_cm": 133.7,
+        "hip_length_cm": 49.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 70,
+      "file_name": "cow_040_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 342,
+      "real_weight": 342,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 342,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 40,
+      "body_measurements": {
+        "heart_girth_cm": 167.2,
+        "oblique_length_cm": 127.2,
+        "withers_height_cm": 100.1,
+        "hip_length_cm": 29.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 71,
+      "file_name": "cow_041_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 479,
+      "real_weight": 479,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 479,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 41,
+      "body_measurements": {
+        "heart_girth_cm": 191.6,
+        "oblique_length_cm": 148.4,
+        "withers_height_cm": 116.9,
+        "hip_length_cm": 39.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 72,
+      "file_name": "cow_042_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 445,
+      "real_weight": 445,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 445,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 42,
+      "body_measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 73,
+      "file_name": "cow_043_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 601,
+      "real_weight": 601,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 601,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 43,
+      "body_measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 74,
+      "file_name": "cow_044_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 565,
+      "real_weight": 565,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 565,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 44,
+      "body_measurements": {
+        "heart_girth_cm": 206.9,
+        "oblique_length_cm": 161.7,
+        "withers_height_cm": 127.4,
+        "hip_length_cm": 45.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 75,
+      "file_name": "cow_045_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 341,
+      "real_weight": 341,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 341,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 45,
+      "body_measurements": {
+        "heart_girth_cm": 167.0,
+        "oblique_length_cm": 127.0,
+        "withers_height_cm": 100.0,
+        "hip_length_cm": 29.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 76,
+      "file_name": "cow_046_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 353,
+      "real_weight": 353,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 353,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 46,
+      "body_measurements": {
+        "heart_girth_cm": 169.1,
+        "oblique_length_cm": 128.9,
+        "withers_height_cm": 101.5,
+        "hip_length_cm": 29.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 77,
+      "file_name": "cow_047_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 511,
+      "real_weight": 511,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 511,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 47,
+      "body_measurements": {
+        "heart_girth_cm": 197.3,
+        "oblique_length_cm": 153.4,
+        "withers_height_cm": 120.8,
+        "hip_length_cm": 41.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 78,
+      "file_name": "cow_048_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 486,
+      "real_weight": 486,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 486,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 48,
+      "body_measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 79,
+      "file_name": "cow_049_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 342,
+      "real_weight": 342,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 342,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 49,
+      "body_measurements": {
+        "heart_girth_cm": 167.2,
+        "oblique_length_cm": 127.2,
+        "withers_height_cm": 100.1,
+        "hip_length_cm": 29.1
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 80,
+      "file_name": "cow_050_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 600,
+      "real_weight": 600,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 600,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 50,
+      "body_measurements": {
+        "heart_girth_cm": 213.2,
+        "oblique_length_cm": 167.2,
+        "withers_height_cm": 131.6,
+        "hip_length_cm": 47.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 81,
+      "file_name": "cow_051_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 450,
+      "real_weight": 450,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 450,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 51,
+      "body_measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 82,
+      "file_name": "cow_052_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 443,
+      "real_weight": 443,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 443,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 52,
+      "body_measurements": {
+        "heart_girth_cm": 185.2,
+        "oblique_length_cm": 142.8,
+        "withers_height_cm": 112.5,
+        "hip_length_cm": 36.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 83,
+      "file_name": "cow_053_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 550,
+      "real_weight": 550,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 550,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 53,
+      "body_measurements": {
+        "heart_girth_cm": 204.2,
+        "oblique_length_cm": 159.4,
+        "withers_height_cm": 125.5,
+        "hip_length_cm": 44.2
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 84,
+      "file_name": "cow_054_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 444,
+      "real_weight": 444,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 444,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 54,
+      "body_measurements": {
+        "heart_girth_cm": 185.4,
+        "oblique_length_cm": 143.0,
+        "withers_height_cm": 112.6,
+        "hip_length_cm": 36.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 85,
+      "file_name": "cow_055_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 497,
+      "real_weight": 497,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 497,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 55,
+      "body_measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 86,
+      "file_name": "cow_056_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 408,
+      "real_weight": 408,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 408,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 56,
+      "body_measurements": {
+        "heart_girth_cm": 178.9,
+        "oblique_length_cm": 137.4,
+        "withers_height_cm": 108.2,
+        "hip_length_cm": 33.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 87,
+      "file_name": "cow_057_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 346,
+      "real_weight": 346,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 346,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 57,
+      "body_measurements": {
+        "heart_girth_cm": 167.9,
+        "oblique_length_cm": 127.8,
+        "withers_height_cm": 100.6,
+        "hip_length_cm": 29.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 88,
+      "file_name": "cow_058_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 465,
+      "real_weight": 465,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 465,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 58,
+      "body_measurements": {
+        "heart_girth_cm": 189.1,
+        "oblique_length_cm": 146.2,
+        "withers_height_cm": 115.1,
+        "hip_length_cm": 38.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 89,
+      "file_name": "cow_059_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 602,
+      "real_weight": 602,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 602,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 59,
+      "body_measurements": {
+        "heart_girth_cm": 213.5,
+        "oblique_length_cm": 167.5,
+        "withers_height_cm": 131.9,
+        "hip_length_cm": 48.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 90,
+      "file_name": "cow_060_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 497,
+      "real_weight": 497,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 497,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 60,
+      "body_measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 91,
+      "file_name": "cow_061_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 601,
+      "real_weight": 601,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 601,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 61,
+      "body_measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 92,
+      "file_name": "cow_062_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 586,
+      "real_weight": 586,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 586,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 62,
+      "body_measurements": {
+        "heart_girth_cm": 210.7,
+        "oblique_length_cm": 165.0,
+        "withers_height_cm": 129.9,
+        "hip_length_cm": 46.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 93,
+      "file_name": "cow_063_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 608,
+      "real_weight": 608,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 608,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 63,
+      "body_measurements": {
+        "heart_girth_cm": 214.6,
+        "oblique_length_cm": 168.4,
+        "withers_height_cm": 132.6,
+        "hip_length_cm": 48.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 94,
+      "file_name": "cow_064_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 610,
+      "real_weight": 610,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 610,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 64,
+      "body_measurements": {
+        "heart_girth_cm": 214.9,
+        "oblique_length_cm": 168.7,
+        "withers_height_cm": 132.8,
+        "hip_length_cm": 48.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 95,
+      "file_name": "cow_065_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 445,
+      "real_weight": 445,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 445,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 65,
+      "body_measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 96,
+      "file_name": "cow_066_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 346,
+      "real_weight": 346,
+      "condition": "delgada",
+      "error": 0,
+      "ai_estimate": 346,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 66,
+      "body_measurements": {
+        "heart_girth_cm": 167.9,
+        "oblique_length_cm": 127.8,
+        "withers_height_cm": 100.6,
+        "hip_length_cm": 29.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 97,
+      "file_name": "cow_067_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 486,
+      "real_weight": 486,
+      "condition": "media",
+      "error": 0,
+      "ai_estimate": 486,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 67,
+      "body_measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 98,
+      "file_name": "cow_068_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 617,
+      "real_weight": 617,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 617,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 68,
+      "body_measurements": {
+        "heart_girth_cm": 216.2,
+        "oblique_length_cm": 169.8,
+        "withers_height_cm": 133.7,
+        "hip_length_cm": 49.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 99,
+      "file_name": "cow_069_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 512,
+      "real_weight": 512,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 512,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 69,
+      "body_measurements": {
+        "heart_girth_cm": 197.5,
+        "oblique_length_cm": 153.5,
+        "withers_height_cm": 120.9,
+        "hip_length_cm": 41.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 100,
+      "file_name": "cow_070_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 644,
+      "real_weight": 644,
+      "condition": "excelente",
+      "error": 0,
+      "ai_estimate": 644,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 70,
+      "body_measurements": {
+        "heart_girth_cm": 221.0,
+        "oblique_length_cm": 174.0,
+        "withers_height_cm": 137.0,
+        "hip_length_cm": 51.0
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 101,
+      "file_name": "cow_071_side.jpg",
+      "width": 4032,
+      "height": 3024,
+      "weight_estimate": 586,
+      "real_weight": 586,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 586,
+      "confidence": "muy_alta",
+      "view_angle": "side",
+      "cow_number": 71,
+      "body_measurements": {
+        "heart_girth_cm": 210.7,
+        "oblique_length_cm": 165.0,
+        "withers_height_cm": 129.9,
+        "hip_length_cm": 46.8
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    },
+    {
+      "id": 102,
+      "file_name": "cow_072_back.jpg",
+      "width": 3024,
+      "height": 4032,
+      "weight_estimate": 567,
+      "real_weight": 567,
+      "condition": "buena",
+      "error": 0,
+      "ai_estimate": 567,
+      "confidence": "muy_alta",
+      "view_angle": "back",
+      "cow_number": 72,
+      "body_measurements": {
+        "heart_girth_cm": 207.3,
+        "oblique_length_cm": 162.1,
+        "withers_height_cm": 127.6,
+        "hip_length_cm": 45.4
+      },
+      "dataset_source": "cattle_side_back_view",
+      "has_real_measurements": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 31,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 545,
+      "measurements": {
+        "heart_girth_cm": 203.4,
+        "oblique_length_cm": 158.6,
+        "withers_height_cm": 124.9,
+        "hip_length_cm": 43.8
+      }
+    },
+    {
+      "id": 2,
+      "image_id": 32,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 507,
+      "measurements": {
+        "heart_girth_cm": 196.6,
+        "oblique_length_cm": 152.7,
+        "withers_height_cm": 120.3,
+        "hip_length_cm": 41.1
+      }
+    },
+    {
+      "id": 3,
+      "image_id": 33,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 450,
+      "measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      }
+    },
+    {
+      "id": 4,
+      "image_id": 34,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 604,
+      "measurements": {
+        "heart_girth_cm": 213.9,
+        "oblique_length_cm": 167.8,
+        "withers_height_cm": 132.1,
+        "hip_length_cm": 48.1
+      }
+    },
+    {
+      "id": 5,
+      "image_id": 35,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 448,
+      "measurements": {
+        "heart_girth_cm": 186.1,
+        "oblique_length_cm": 143.6,
+        "withers_height_cm": 113.1,
+        "hip_length_cm": 36.8
+      }
+    },
+    {
+      "id": 6,
+      "image_id": 36,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 450,
+      "measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      }
+    },
+    {
+      "id": 7,
+      "image_id": 37,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 495,
+      "measurements": {
+        "heart_girth_cm": 194.4,
+        "oblique_length_cm": 150.9,
+        "withers_height_cm": 118.8,
+        "hip_length_cm": 40.2
+      }
+    },
+    {
+      "id": 8,
+      "image_id": 38,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 434,
+      "measurements": {
+        "heart_girth_cm": 183.6,
+        "oblique_length_cm": 141.4,
+        "withers_height_cm": 111.4,
+        "hip_length_cm": 35.8
+      }
+    },
+    {
+      "id": 9,
+      "image_id": 39,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 400,
+      "measurements": {
+        "heart_girth_cm": 177.5,
+        "oblique_length_cm": 136.2,
+        "withers_height_cm": 107.2,
+        "hip_length_cm": 33.3
+      }
+    },
+    {
+      "id": 10,
+      "image_id": 40,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 467,
+      "measurements": {
+        "heart_girth_cm": 189.5,
+        "oblique_length_cm": 146.5,
+        "withers_height_cm": 115.4,
+        "hip_length_cm": 38.1
+      }
+    },
+    {
+      "id": 11,
+      "image_id": 41,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 466,
+      "measurements": {
+        "heart_girth_cm": 189.3,
+        "oblique_length_cm": 146.4,
+        "withers_height_cm": 115.3,
+        "hip_length_cm": 38.1
+      }
+    },
+    {
+      "id": 12,
+      "image_id": 42,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 362,
+      "measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      }
+    },
+    {
+      "id": 13,
+      "image_id": 43,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 444,
+      "measurements": {
+        "heart_girth_cm": 185.4,
+        "oblique_length_cm": 143.0,
+        "withers_height_cm": 112.6,
+        "hip_length_cm": 36.5
+      }
+    },
+    {
+      "id": 14,
+      "image_id": 44,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 441,
+      "measurements": {
+        "heart_girth_cm": 184.8,
+        "oblique_length_cm": 142.5,
+        "withers_height_cm": 112.2,
+        "hip_length_cm": 36.3
+      }
+    },
+    {
+      "id": 15,
+      "image_id": 45,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 497,
+      "measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      }
+    },
+    {
+      "id": 16,
+      "image_id": 46,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 409,
+      "measurements": {
+        "heart_girth_cm": 179.1,
+        "oblique_length_cm": 137.5,
+        "withers_height_cm": 108.3,
+        "hip_length_cm": 33.9
+      }
+    },
+    {
+      "id": 17,
+      "image_id": 47,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 371,
+      "measurements": {
+        "heart_girth_cm": 172.3,
+        "oblique_length_cm": 131.7,
+        "withers_height_cm": 103.7,
+        "hip_length_cm": 31.2
+      }
+    },
+    {
+      "id": 18,
+      "image_id": 48,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 434,
+      "measurements": {
+        "heart_girth_cm": 183.6,
+        "oblique_length_cm": 141.4,
+        "withers_height_cm": 111.4,
+        "hip_length_cm": 35.8
+      }
+    },
+    {
+      "id": 19,
+      "image_id": 49,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 367,
+      "measurements": {
+        "heart_girth_cm": 171.6,
+        "oblique_length_cm": 131.0,
+        "withers_height_cm": 103.2,
+        "hip_length_cm": 30.9
+      }
+    },
+    {
+      "id": 20,
+      "image_id": 50,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 362,
+      "measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      }
+    },
+    {
+      "id": 21,
+      "image_id": 51,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 403,
+      "measurements": {
+        "heart_girth_cm": 178.0,
+        "oblique_length_cm": 136.6,
+        "withers_height_cm": 107.6,
+        "hip_length_cm": 33.5
+      }
+    },
+    {
+      "id": 22,
+      "image_id": 52,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 440,
+      "measurements": {
+        "heart_girth_cm": 184.6,
+        "oblique_length_cm": 142.4,
+        "withers_height_cm": 112.1,
+        "hip_length_cm": 36.2
+      }
+    },
+    {
+      "id": 23,
+      "image_id": 53,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 362,
+      "measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      }
+    },
+    {
+      "id": 24,
+      "image_id": 54,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 445,
+      "measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      }
+    },
+    {
+      "id": 25,
+      "image_id": 55,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 362,
+      "measurements": {
+        "heart_girth_cm": 170.7,
+        "oblique_length_cm": 130.3,
+        "withers_height_cm": 102.6,
+        "hip_length_cm": 30.5
+      }
+    },
+    {
+      "id": 26,
+      "image_id": 56,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 467,
+      "measurements": {
+        "heart_girth_cm": 189.5,
+        "oblique_length_cm": 146.5,
+        "withers_height_cm": 115.4,
+        "hip_length_cm": 38.1
+      }
+    },
+    {
+      "id": 27,
+      "image_id": 57,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 450,
+      "measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      }
+    },
+    {
+      "id": 28,
+      "image_id": 58,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 601,
+      "measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      }
+    },
+    {
+      "id": 29,
+      "image_id": 59,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 550,
+      "measurements": {
+        "heart_girth_cm": 204.2,
+        "oblique_length_cm": 159.4,
+        "withers_height_cm": 125.5,
+        "hip_length_cm": 44.2
+      }
+    },
+    {
+      "id": 30,
+      "image_id": 60,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 608,
+      "measurements": {
+        "heart_girth_cm": 214.6,
+        "oblique_length_cm": 168.4,
+        "withers_height_cm": 132.6,
+        "hip_length_cm": 48.4
+      }
+    },
+    {
+      "id": 31,
+      "image_id": 61,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 486,
+      "measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      }
+    },
+    {
+      "id": 32,
+      "image_id": 62,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 465,
+      "measurements": {
+        "heart_girth_cm": 189.1,
+        "oblique_length_cm": 146.2,
+        "withers_height_cm": 115.1,
+        "hip_length_cm": 38.0
+      }
+    },
+    {
+      "id": 33,
+      "image_id": 63,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 450,
+      "measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      }
+    },
+    {
+      "id": 34,
+      "image_id": 64,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 497,
+      "measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      }
+    },
+    {
+      "id": 35,
+      "image_id": 65,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 602,
+      "measurements": {
+        "heart_girth_cm": 213.5,
+        "oblique_length_cm": 167.5,
+        "withers_height_cm": 131.9,
+        "hip_length_cm": 48.0
+      }
+    },
+    {
+      "id": 36,
+      "image_id": 66,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 400,
+      "measurements": {
+        "heart_girth_cm": 177.5,
+        "oblique_length_cm": 136.2,
+        "withers_height_cm": 107.2,
+        "hip_length_cm": 33.3
+      }
+    },
+    {
+      "id": 37,
+      "image_id": 67,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 612,
+      "measurements": {
+        "heart_girth_cm": 215.3,
+        "oblique_length_cm": 169.0,
+        "withers_height_cm": 133.1,
+        "hip_length_cm": 48.7
+      }
+    },
+    {
+      "id": 38,
+      "image_id": 68,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 559,
+      "measurements": {
+        "heart_girth_cm": 205.9,
+        "oblique_length_cm": 160.8,
+        "withers_height_cm": 126.6,
+        "hip_length_cm": 44.8
+      }
+    },
+    {
+      "id": 39,
+      "image_id": 69,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 617,
+      "measurements": {
+        "heart_girth_cm": 216.2,
+        "oblique_length_cm": 169.8,
+        "withers_height_cm": 133.7,
+        "hip_length_cm": 49.0
+      }
+    },
+    {
+      "id": 40,
+      "image_id": 70,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 342,
+      "measurements": {
+        "heart_girth_cm": 167.2,
+        "oblique_length_cm": 127.2,
+        "withers_height_cm": 100.1,
+        "hip_length_cm": 29.1
+      }
+    },
+    {
+      "id": 41,
+      "image_id": 71,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 479,
+      "measurements": {
+        "heart_girth_cm": 191.6,
+        "oblique_length_cm": 148.4,
+        "withers_height_cm": 116.9,
+        "hip_length_cm": 39.0
+      }
+    },
+    {
+      "id": 42,
+      "image_id": 72,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 445,
+      "measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      }
+    },
+    {
+      "id": 43,
+      "image_id": 73,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 601,
+      "measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      }
+    },
+    {
+      "id": 44,
+      "image_id": 74,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 565,
+      "measurements": {
+        "heart_girth_cm": 206.9,
+        "oblique_length_cm": 161.7,
+        "withers_height_cm": 127.4,
+        "hip_length_cm": 45.3
+      }
+    },
+    {
+      "id": 45,
+      "image_id": 75,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 341,
+      "measurements": {
+        "heart_girth_cm": 167.0,
+        "oblique_length_cm": 127.0,
+        "withers_height_cm": 100.0,
+        "hip_length_cm": 29.0
+      }
+    },
+    {
+      "id": 46,
+      "image_id": 76,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 353,
+      "measurements": {
+        "heart_girth_cm": 169.1,
+        "oblique_length_cm": 128.9,
+        "withers_height_cm": 101.5,
+        "hip_length_cm": 29.9
+      }
+    },
+    {
+      "id": 47,
+      "image_id": 77,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 511,
+      "measurements": {
+        "heart_girth_cm": 197.3,
+        "oblique_length_cm": 153.4,
+        "withers_height_cm": 120.8,
+        "hip_length_cm": 41.3
+      }
+    },
+    {
+      "id": 48,
+      "image_id": 78,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 486,
+      "measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      }
+    },
+    {
+      "id": 49,
+      "image_id": 79,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 342,
+      "measurements": {
+        "heart_girth_cm": 167.2,
+        "oblique_length_cm": 127.2,
+        "withers_height_cm": 100.1,
+        "hip_length_cm": 29.1
+      }
+    },
+    {
+      "id": 50,
+      "image_id": 80,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 600,
+      "measurements": {
+        "heart_girth_cm": 213.2,
+        "oblique_length_cm": 167.2,
+        "withers_height_cm": 131.6,
+        "hip_length_cm": 47.8
+      }
+    },
+    {
+      "id": 51,
+      "image_id": 81,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 450,
+      "measurements": {
+        "heart_girth_cm": 186.4,
+        "oblique_length_cm": 143.9,
+        "withers_height_cm": 113.3,
+        "hip_length_cm": 36.9
+      }
+    },
+    {
+      "id": 52,
+      "image_id": 82,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 443,
+      "measurements": {
+        "heart_girth_cm": 185.2,
+        "oblique_length_cm": 142.8,
+        "withers_height_cm": 112.5,
+        "hip_length_cm": 36.4
+      }
+    },
+    {
+      "id": 53,
+      "image_id": 83,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 550,
+      "measurements": {
+        "heart_girth_cm": 204.2,
+        "oblique_length_cm": 159.4,
+        "withers_height_cm": 125.5,
+        "hip_length_cm": 44.2
+      }
+    },
+    {
+      "id": 54,
+      "image_id": 84,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 444,
+      "measurements": {
+        "heart_girth_cm": 185.4,
+        "oblique_length_cm": 143.0,
+        "withers_height_cm": 112.6,
+        "hip_length_cm": 36.5
+      }
+    },
+    {
+      "id": 55,
+      "image_id": 85,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 497,
+      "measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      }
+    },
+    {
+      "id": 56,
+      "image_id": 86,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 408,
+      "measurements": {
+        "heart_girth_cm": 178.9,
+        "oblique_length_cm": 137.4,
+        "withers_height_cm": 108.2,
+        "hip_length_cm": 33.9
+      }
+    },
+    {
+      "id": 57,
+      "image_id": 87,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 346,
+      "measurements": {
+        "heart_girth_cm": 167.9,
+        "oblique_length_cm": 127.8,
+        "withers_height_cm": 100.6,
+        "hip_length_cm": 29.4
+      }
+    },
+    {
+      "id": 58,
+      "image_id": 88,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 465,
+      "measurements": {
+        "heart_girth_cm": 189.1,
+        "oblique_length_cm": 146.2,
+        "withers_height_cm": 115.1,
+        "hip_length_cm": 38.0
+      }
+    },
+    {
+      "id": 59,
+      "image_id": 89,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 602,
+      "measurements": {
+        "heart_girth_cm": 213.5,
+        "oblique_length_cm": 167.5,
+        "withers_height_cm": 131.9,
+        "hip_length_cm": 48.0
+      }
+    },
+    {
+      "id": 60,
+      "image_id": 90,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 497,
+      "measurements": {
+        "heart_girth_cm": 194.8,
+        "oblique_length_cm": 151.2,
+        "withers_height_cm": 119.0,
+        "hip_length_cm": 40.3
+      }
+    },
+    {
+      "id": 61,
+      "image_id": 91,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 601,
+      "measurements": {
+        "heart_girth_cm": 213.3,
+        "oblique_length_cm": 167.3,
+        "withers_height_cm": 131.7,
+        "hip_length_cm": 47.9
+      }
+    },
+    {
+      "id": 62,
+      "image_id": 92,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 586,
+      "measurements": {
+        "heart_girth_cm": 210.7,
+        "oblique_length_cm": 165.0,
+        "withers_height_cm": 129.9,
+        "hip_length_cm": 46.8
+      }
+    },
+    {
+      "id": 63,
+      "image_id": 93,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 608,
+      "measurements": {
+        "heart_girth_cm": 214.6,
+        "oblique_length_cm": 168.4,
+        "withers_height_cm": 132.6,
+        "hip_length_cm": 48.4
+      }
+    },
+    {
+      "id": 64,
+      "image_id": 94,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 610,
+      "measurements": {
+        "heart_girth_cm": 214.9,
+        "oblique_length_cm": 168.7,
+        "withers_height_cm": 132.8,
+        "hip_length_cm": 48.5
+      }
+    },
+    {
+      "id": 65,
+      "image_id": 95,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 445,
+      "measurements": {
+        "heart_girth_cm": 185.5,
+        "oblique_length_cm": 143.1,
+        "withers_height_cm": 112.7,
+        "hip_length_cm": 36.6
+      }
+    },
+    {
+      "id": 66,
+      "image_id": 96,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 346,
+      "measurements": {
+        "heart_girth_cm": 167.9,
+        "oblique_length_cm": 127.8,
+        "withers_height_cm": 100.6,
+        "hip_length_cm": 29.4
+      }
+    },
+    {
+      "id": 67,
+      "image_id": 97,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 486,
+      "measurements": {
+        "heart_girth_cm": 192.8,
+        "oblique_length_cm": 149.5,
+        "withers_height_cm": 117.7,
+        "hip_length_cm": 39.5
+      }
+    },
+    {
+      "id": 68,
+      "image_id": 98,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 617,
+      "measurements": {
+        "heart_girth_cm": 216.2,
+        "oblique_length_cm": 169.8,
+        "withers_height_cm": 133.7,
+        "hip_length_cm": 49.0
+      }
+    },
+    {
+      "id": 69,
+      "image_id": 99,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 512,
+      "measurements": {
+        "heart_girth_cm": 197.5,
+        "oblique_length_cm": 153.5,
+        "withers_height_cm": 120.9,
+        "hip_length_cm": 41.4
+      }
+    },
+    {
+      "id": 70,
+      "image_id": 100,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 644,
+      "measurements": {
+        "heart_girth_cm": 221.0,
+        "oblique_length_cm": 174.0,
+        "withers_height_cm": 137.0,
+        "hip_length_cm": 51.0
+      }
+    },
+    {
+      "id": 71,
+      "image_id": 101,
+      "bbox": [
+        0,
+        0,
+        4032,
+        3024
+      ],
+      "category_id": 1,
+      "weight_kg": 586,
+      "measurements": {
+        "heart_girth_cm": 210.7,
+        "oblique_length_cm": 165.0,
+        "withers_height_cm": 129.9,
+        "hip_length_cm": 46.8
+      }
+    },
+    {
+      "id": 72,
+      "image_id": 102,
+      "bbox": [
+        0,
+        0,
+        3024,
+        4032
+      ],
+      "category_id": 1,
+      "weight_kg": 567,
+      "measurements": {
+        "heart_girth_cm": 207.3,
+        "oblique_length_cm": 162.1,
+        "withers_height_cm": 127.6,
+        "hip_length_cm": 45.4
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "cow",
+      "supercategory": "animal"
+    }
+  ]
+}

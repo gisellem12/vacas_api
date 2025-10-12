@@ -33,11 +33,11 @@ export const UploadForm: React.FC<UploadFormProps> = ({
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 relative overflow-hidden group hover:shadow-xl transition-all duration-300">
       {/* Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-amber-500"></div>
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-600 via-green-600 to-stone-600"></div>
       
       {/* Feature Icon */}
-      <div className="w-20 h-20 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md border-2 border-emerald-100 group-hover:scale-110 transition-transform duration-300">
-        <i className="fas fa-camera text-2xl text-emerald-600" aria-hidden="true"></i>
+      <div className="w-20 h-20 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md border-2 border-amber-100 group-hover:scale-110 transition-transform duration-300">
+        <i className="fas fa-camera text-2xl text-amber-600" aria-hidden="true"></i>
       </div>
       
       <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Captura Simple</h3>
@@ -59,14 +59,14 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             type="file"
             accept="image/jpeg,image/jpg,image/png,image/webp"
             onChange={handleFileSelect}
-            className="w-full p-4 border-2 border-dashed border-emerald-300 rounded-xl bg-emerald-50 text-emerald-700 cursor-pointer hover:border-emerald-400 hover:bg-emerald-100 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-100 file:text-emerald-700 hover:file:bg-emerald-200"
+            className="w-full p-4 border-2 border-dashed border-amber-300 rounded-xl bg-amber-50 text-amber-700 cursor-pointer hover:border-amber-400 hover:bg-amber-100 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-100 file:text-amber-700 hover:file:bg-amber-200"
             required
             aria-describedby="file-help"
           />
           <p id="file-help" className="text-xs text-gray-500 mt-2">
             Formatos soportados: JPEG, PNG, WebP. Tamaño máximo: 20MB
             <br />
-            <span className="text-emerald-600 font-medium">Las imágenes se comprimen automáticamente para una subida más rápida</span>
+            <span className="text-amber-600 font-medium">Las imágenes se comprimen automáticamente para una subida más rápida</span>
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             <p className="text-sm font-semibold text-gray-700 mb-3 text-center">
               <i className="fas fa-eye mr-2" aria-hidden="true"></i> Vista previa:
             </p>
-            <div className="relative w-full h-64 rounded-xl overflow-hidden border-2 border-emerald-200 shadow-lg">
+            <div className="relative w-full h-64 rounded-xl overflow-hidden border-2 border-amber-200 shadow-lg">
               <Image
                 src={previewUrl}
                 alt="Preview de imagen de ganado"
@@ -89,16 +89,16 @@ export const UploadForm: React.FC<UploadFormProps> = ({
 
         {/* Progress Bar */}
         {isLoading && (
-          <div className="space-y-3 mb-4 p-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl border border-emerald-200">
+          <div className="space-y-3 mb-4 p-4 bg-gradient-to-r from-amber-50 to-green-50 rounded-xl border border-amber-200">
             <div className="flex justify-between text-sm text-gray-700">
               <span className="font-medium">
                 {uploadProgress < 20 ? "🔄 Comprimiendo imagen..." : "Procesando imagen..."}
               </span>
-              <span className="font-bold text-emerald-600">{uploadProgress}%</span>
+              <span className="font-bold text-amber-600">{uploadProgress}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-4 shadow-inner">
               <div 
-                className="bg-gradient-to-r from-emerald-500 to-blue-500 h-4 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+                className="bg-gradient-to-r from-amber-600 to-green-600 h-4 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
                 style={{ width: `${uploadProgress}%` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
@@ -116,9 +116,9 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             {uploadProgress > 0 && uploadProgress < 100 && (
               <div className="flex justify-center">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                 </div>
               </div>
             )}
@@ -130,7 +130,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({
           <button
             type="submit"
             disabled={!selectedFile || isLoading}
-            className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-amber-600 to-amber-500 text-white py-4 px-6 rounded-xl font-semibold hover:from-amber-700 hover:to-amber-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2"
             aria-label={isLoading ? "Analizando imagen..." : "Analizar imagen con IA"}
           >
             {isLoading ? (
@@ -150,7 +150,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({
             type="button"
             onClick={reset}
             disabled={isLoading}
-            className="px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
+            className="px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
             aria-label="Limpiar formulario y empezar de nuevo"
           >
             <i className="fas fa-redo" aria-hidden="true"></i>
