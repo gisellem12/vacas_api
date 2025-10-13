@@ -642,6 +642,10 @@ export default function Home() {
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
+              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>
+                <i className="fas fa-mobile-alt mr-1"></i>
+                Descargar App
+              </a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'planes' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
               
@@ -1345,6 +1349,170 @@ export default function Home() {
               <p className="text-green-700 text-sm font-medium">
                 🎯 <strong>Garantía de satisfacción:</strong> Prueba cualquier plan durante 14 días sin compromiso
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Descargar App */}
+        <section id="descargar-app" className={`${activeSection === 'descargar-app' ? 'block' : 'hidden'}`}>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              <i className="fas fa-mobile-alt text-green-500 mr-3"></i>
+              Descarga Nuestra App Móvil
+            </h2>
+            <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Lleva AgroTech Vision en tu bolsillo. Analiza tus vacas desde cualquier lugar con nuestra aplicación móvil.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {/* Card Principal de Descarga */}
+            <div className="bg-gradient-to-br from-green-50 to-white p-8 md:p-12 rounded-2xl shadow-2xl border border-green-200 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                {/* Información */}
+                <div>
+                  <div className="inline-flex items-center bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    <i className="fas fa-android text-xl mr-2"></i>
+                    Disponible para Android
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    AgroTech Vision Mobile
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    Accede a todas las funcionalidades de nuestra plataforma desde tu smartphone. 
+                    Análisis en tiempo real, gestión de ganado, y reportes detallados en la palma de tu mano.
+                  </p>
+
+                  {/* Características */}
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-start gap-3">
+                      <i className="fas fa-check-circle text-green-500 mt-1"></i>
+                      <span className="text-gray-700">Análisis de peso con IA en segundos</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <i className="fas fa-check-circle text-green-500 mt-1"></i>
+                      <span className="text-gray-700">Funciona sin conexión a internet</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <i className="fas fa-check-circle text-green-500 mt-1"></i>
+                      <span className="text-gray-700">Sincronización automática con la nube</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <i className="fas fa-check-circle text-green-500 mt-1"></i>
+                      <span className="text-gray-700">Historial completo de análisis</span>
+                    </div>
+                  </div>
+
+                  {/* Botón de Descarga */}
+                  <a 
+                    href="/downloads/agrotechvision.apk" 
+                    download
+                    className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                  >
+                    <i className="fas fa-download text-2xl"></i>
+                    <div className="text-left">
+                      <div className="text-sm font-normal opacity-90">Descargar APK</div>
+                      <div>AgroTech Vision</div>
+                    </div>
+                  </a>
+
+                  <p className="text-xs text-gray-500 mt-4">
+                    <i className="fas fa-info-circle mr-1"></i>
+                    Versión 1.0.0 • Tamaño: 22 MB • Android 8.0+
+                  </p>
+                </div>
+
+                {/* Mockup del teléfono */}
+                <div className="hidden md:flex justify-center items-center">
+                  <div className="relative">
+                    <div className="w-64 h-[500px] bg-gray-900 rounded-[40px] p-3 shadow-2xl">
+                      <div className="w-full h-full bg-gradient-to-br from-green-400 to-green-600 rounded-[32px] flex items-center justify-center overflow-hidden relative">
+                        {/* Simulación de app */}
+                        <div className="absolute top-0 left-0 right-0 bg-white/95 p-4">
+                          <div className="text-center">
+                            <i className="fas fa-cow text-4xl text-green-500 mb-2"></i>
+                            <h4 className="font-bold text-gray-900 text-sm">AgroTech Vision</h4>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/95">
+                          <div className="bg-green-500 text-white rounded-xl p-3 text-center">
+                            <i className="fas fa-camera text-2xl mb-1"></i>
+                            <p className="text-xs font-semibold">Analizar Vaca</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Elementos decorativos */}
+                    <div className="absolute -top-4 -right-4 w-20 h-20 bg-green-200 rounded-full opacity-50 animate-pulse"></div>
+                    <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-green-300 rounded-full opacity-50 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Instrucciones de instalación */}
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i className="fas fa-list-ol text-green-500"></i>
+                Cómo instalar la app
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                    1
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Descarga el APK</h4>
+                    <p className="text-gray-600 text-sm">Haz clic en el botón "Descargar APK" arriba</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                    2
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Habilita fuentes desconocidas</h4>
+                    <p className="text-gray-600 text-sm">Ve a Configuración → Seguridad → Permitir instalación desde fuentes desconocidas</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                    3
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Instala la app</h4>
+                    <p className="text-gray-600 text-sm">Abre el archivo descargado y sigue las instrucciones</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                    4
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">¡Listo para usar!</h4>
+                    <p className="text-gray-600 text-sm">Abre la app e inicia sesión con tu cuenta de AgroTech Vision</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Nota de seguridad */}
+              <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <i className="fas fa-shield-alt text-green-600 mt-1"></i>
+                  <div>
+                    <h4 className="font-semibold text-green-800 mb-1">Seguridad garantizada</h4>
+                    <p className="text-green-700 text-sm">
+                      Nuestra app está verificada y es totalmente segura. No recopilamos datos personales sin tu consentimiento.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
