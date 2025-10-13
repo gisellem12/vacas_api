@@ -596,9 +596,9 @@ export default function Home() {
         {isScrolling && (
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-600 animate-pulse"></div>
         )}
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-12 py-5">
           <div className="flex items-center justify-between">
-            <a href="#" className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors">
+            <a href="#" className="text-3xl font-bold text-green-600 hover:text-green-700 transition-colors ml-4">
               AgroTech
             </a>
             
@@ -684,7 +684,7 @@ export default function Home() {
               </div>
             </nav>
             
-        <div className="hidden md:flex gap-6 items-center">
+        <div className="hidden md:flex gap-8 items-center mr-4">
           {isAuthenticated && user ? (
             <div className="flex items-center gap-6">
               <span className="text-gray-700 font-semibold">
