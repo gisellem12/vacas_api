@@ -20,18 +20,18 @@ load_dotenv("config.env")
 # Crear la aplicación FastAPI
 app = FastAPI(title="AgroTech Vision API", version="1.0.0")
 
-# Endpoint de healthcheck para Railway
+# Endpoint de healthcheck para Railway - MUY SIMPLE
 @app.get("/")
 async def healthcheck():
     """Endpoint de healthcheck para Railway"""
     print("🔍 Healthcheck endpoint called")
-    return {"status": "ok", "message": "AgroTech Vision API is running", "version": "1.0.0"}
+    return {"status": "ok"}
 
 @app.get("/health")
 async def health():
     """Endpoint alternativo de healthcheck"""
     print("🔍 Health endpoint called")
-    return {"status": "healthy", "message": "API is running"}
+    return {"status": "healthy"}
 
 # Importar módulos de autenticación
 from auth import (
@@ -73,8 +73,6 @@ async def lifespan(app: FastAPI):
     yield  # La aplicación está ejecutándose
     
     # Código de cleanup aquí si es necesario
-
-app = FastAPI(title="AgroTech Vision API", lifespan=lifespan)
 
 # Configurar seguridad
 security = HTTPBearer()
@@ -224,37 +222,38 @@ async def register(request: RegisterRequest):
 
 @app.post("/verify-token")
 async def verify_token_endpoint(authorization: str = Header(None)):
-    """Endpoint para verificar si un token JWT es válido"""
+    """Endpoint para verificar token JWT"""
     try:
         if not authorization or not authorization.startswith("Bearer "):
-            return {"valid": False, "message": "Token no proporcionado"}
+            raise HTTPException(status_code=401, detail="Token no proporcionado")
         
         token = authorization.split(" ")[1]
-        
-        # Verificar token
         payload = verify_token(token)
+        
         if not payload:
-            return {"valid": False, "message": "Token inválido o expirado"}
+            raise HTTPException(status_code=401, detail="Token inválido o expirado")
         
-        # Obtener datos del usuario
-        user_email = payload.get("sub")
-        if not user_email:
-            return {"valid": False, "message": "Token inválido"}
+        email = payload.get("sub")
+        if not email:
+            raise HTTPException(status_code=401, detail="Token inválido")
         
-        user = get_user_by_email(user_email)
+        # Obtener usuario de la base de datos
+        user = get_user_by_email(email)
         if not user:
-            return {"valid": False, "message": "Usuario no encontrado"}
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
         
         return {
             "valid": True,
-            "email": user["email"],
-            "name": user["name"],
-            "login_method": user["login_method"]
+            "email": user['email'],
+            "name": user['name'],
+            "login_method": user['login_method']
         }
         
+    except HTTPException:
+        raise
     except Exception as e:
         print(f"❌ Error verificando token: {e}")
-        return {"valid": False, "message": "Error interno del servidor"}
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 @app.get("/me", response_model=UserResponse)
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
