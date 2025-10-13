@@ -24,7 +24,14 @@ app = FastAPI(title="AgroTech Vision API", version="1.0.0")
 @app.get("/")
 async def healthcheck():
     """Endpoint de healthcheck para Railway"""
+    print("🔍 Healthcheck endpoint called")
     return {"status": "ok", "message": "AgroTech Vision API is running", "version": "1.0.0"}
+
+@app.get("/health")
+async def health():
+    """Endpoint alternativo de healthcheck"""
+    print("🔍 Health endpoint called")
+    return {"status": "healthy", "message": "API is running"}
 
 # Importar módulos de autenticación
 from auth import (
@@ -655,4 +662,7 @@ async def test_ai_analysis(image_id: str):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
+    print(f"🚀 Starting server on port {port}")
+    print(f"🌍 Host: 0.0.0.0")
+    print(f"📡 Environment PORT: {os.environ.get('PORT', 'Not set')}")
     uvicorn.run(app, host="0.0.0.0", port=port)
