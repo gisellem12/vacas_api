@@ -637,7 +637,7 @@ export default function Home() {
               </button>
             </div>
             
-            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-1 md:gap-8`}>
+            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-1 md:gap-12`}>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'inicio' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
@@ -685,9 +685,9 @@ export default function Home() {
               </div>
             </nav>
             
-        <div className="hidden md:flex gap-3 items-center">
+        <div className="hidden md:flex gap-6 items-center">
           {isAuthenticated && user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-6">
               <span className="text-gray-700 font-semibold">
                 ¡Hola, {user.name}!
               </span>
@@ -699,10 +699,10 @@ export default function Home() {
               </button>
             </div>
           ) : (
-            <>
+            <div className="flex items-center gap-6">
               <a href="#" className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors border border-gray-300" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>Entrar</a>
               <a href="#" className="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-colors shadow-md hover:shadow-lg" onClick={(e) => { e.preventDefault(); setShowRegisterModal(true); }}>Registrarse</a>
-            </>
+            </div>
           )}
         </div>
           </div>
