@@ -82,8 +82,8 @@ export class AuthService {
   static async authenticatedFetch(url: string, options: RequestInit = {}): Promise<Response> {
     const token = this.getToken();
     
-    const headers = {
-      ...options.headers,
+    const headers: Record<string, string> = {
+      ...(options.headers as Record<string, string>),
     };
 
     // Solo agregar Content-Type si no es FormData

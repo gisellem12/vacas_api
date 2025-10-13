@@ -17,6 +17,15 @@ from dotenv import load_dotenv
 # Cargar variables de entorno desde config.env
 load_dotenv("config.env")
 
+# Crear la aplicación FastAPI
+app = FastAPI(title="AgroTech Vision API", version="1.0.0")
+
+# Endpoint de healthcheck para Railway
+@app.get("/")
+async def healthcheck():
+    """Endpoint de healthcheck para Railway"""
+    return {"status": "ok", "message": "AgroTech Vision API is running", "version": "1.0.0"}
+
 # Importar módulos de autenticación
 from auth import (
     verify_google_token, 
