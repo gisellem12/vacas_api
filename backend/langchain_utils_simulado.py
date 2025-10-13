@@ -256,69 +256,91 @@ def analyze_cow_image_with_context(image_path_or_url):
                 if img.get('real_weight'):
                     dataset_context += f"  (Peso real confirmado: {img.get('real_weight')}kg, Error de estimación: {img.get('error', 0)}kg)\n"
         
-        # Crear mensaje multimodal con contexto del dataset
+        # Crear mensaje multimodal con contexto del dataset usando CHAIN OF THOUGHT
         message = HumanMessage(
             content=[
-                {"type": "text", "text": f"""Eres un veterinario experto en ganado bovino con 25 años de experiencia especializado en estimación de peso corporal. Analiza esta imagen de vaca con máxima precisión usando visión por computadora avanzada.
+                {"type": "text", "text": f"""Eres un veterinario experto en ganado bovino con 25 años de experiencia especializado en estimación de peso corporal. Usa el método CHAIN OF THOUGHT para análisis paso a paso.
 
 {dataset_context}
 
-DATOS DE REFERENCIA PARA CALIBRACIÓN PRECISA:
+DATOS DE REFERENCIA PARA CALIBRACIÓN:
 {EXAMPLES}
 
-METODOLOGÍA DE ANÁLISIS AVANZADA (SIN IDENTIFICACIÓN DE RAZA):
+🎯 METODOLOGÍA CHAIN OF THOUGHT (PASO A PASO):
 
-1. ANÁLISIS VISUAL SISTEMÁTICO:
-   a) Observa el tamaño corporal relativo comparado con objetos de referencia
-   b) Evalúa la profundidad del cuerpo (ancho de costillas y musculatura)
-   c) Analiza la longitud del cuerpo desde hombro hasta cadera
-   d) Considera la altura al hombro y proporciones corporales
-   e) Examina la condición muscular y adiposa
-   f) Compara con el dataset de referencia proporcionado
+**PASO 1: ANÁLISIS DIMENSIONAL**
+Examina y describe en detalle:
+- Longitud corporal (hombro a cadera): corta/media/larga
+- Altura al hombro: baja/media/alta  
+- Ancho del cuerpo (vista lateral): delgado/medio/robusto
+- Profundidad del pecho: poco/medio/muy desarrollado
 
-2. ESTIMACIÓN DE PESO PRECISA:
-   - Usa el dataset de referencia como base de calibración
-   - Aplica análisis dimensional avanzado
-   - Considera perspectiva y ángulo de la imagen
-   - Ajusta por condición corporal observada
+**PASO 2: EVALUACIÓN DE CONDICIÓN CORPORAL**
+Observa y clasifica:
+- Visibilidad de costillas: muy visible/apenas visible/no visible
+- Desarrollo muscular: bajo/medio/alto/muy alto
+- Acumulación de grasa: ninguna/poca/moderada/abundante
+- Estado general: delgada/media/buena/excelente
 
-3. CONDICIÓN CORPORAL (AFECTA EL PESO):
-   - Delgada: Costillas muy visibles, flancos hundidos (-10% del peso base)
-   - Media: Costillas apenas visibles, buen estado (peso base)
-   - Buena/Excelente: Costillas no visibles, buen desarrollo muscular (+10% del peso base)
+**PASO 3: COMPARACIÓN CON REFERENCIAS**
+Compara con el dataset de referencia:
+- Encuentra la vaca más similar en el dataset
+- Identifica diferencias clave
+- Ajusta el peso base según diferencias observadas
 
-4. FACTORES DE PRECISIÓN:
-   - Calidad de la imagen y resolución
-   - Postura y ángulo de la imagen
-   - Iluminación y contraste
-   - Objetos de referencia en la imagen
+**PASO 4: CÁLCULO DE PESO BASE**
+Basándote en dimensiones:
+- Vaca pequeña (300-350 kg): longitud corta + altura baja + cuerpo delgado
+- Vaca mediana (350-450 kg): dimensiones proporcionadas medias
+- Vaca grande (450-550 kg): longitud larga + altura alta + cuerpo robusto
+- Vaca muy grande (550+ kg): todas las dimensiones máximas + muy robusto
 
-🎯 CONTEXTO CRÍTICO PARA PESOS ALTOS:
-⚠️ IMPORTANTE: Para vacas de contextura grande y peso considerable, las predicciones suelen ser MUY BAJAS de lo real.
+**PASO 5: AJUSTES POR CONDICIÓN**
+Aplica factores de corrección:
+- Condición delgada: peso_base × 0.90 (-10%)
+- Condición media: peso_base × 1.00 (sin cambio)
+- Condición buena: peso_base × 1.10 (+10%)
+- Condición excelente: peso_base × 1.15 (+15%)
 
-Si notas signos de peso considerable (vaca robusta, contextura grande, músculos desarrollados), ajusta SIGNIFICATIVAMENTE hacia arriba tu estimación.
+**PASO 6: AJUSTE FINAL POR CONFIANZA**
+Considera factores de calidad de imagen:
+- Imagen clara, ángulo lateral perfecto: sin ajuste
+- Imagen aceptable, ligera angulación: ±5% incertidumbre
+- Imagen pobre, ángulo no ideal: ±10% incertidumbre
 
-Patrones observados críticos:
-- Vacas con contextura grande: peso real suele ser 50-100kg mayor que estimación inicial
-- Vacas con músculos desarrollados: considerar peso adicional por masa muscular (+30-50kg)
-- Vacas adultas en buen estado: peso real puede ser significativamente mayor (+40-80kg)
-- Vacas de más de 500kg real: subestimación puede ser de 100-150kg
+**PASO 7: VERIFICACIÓN DE REALISMO**
+Revisa la estimación final:
+- ¿Está dentro del rango típico (300-700 kg)?
+- ¿Es consistente con la condición observada?
+- ¿Coincide con vacas similares del dataset?
 
-Instrucciones especiales:
-1. Analiza la imagen cuidadosamente
-2. Identifica signos de contextura grande o peso considerable
-3. Si detectas estos signos, ajusta tu estimación hacia arriba de forma AGRESIVA
-4. Para vacas que parecen pesadas, considera pesos de 500-600kg como mínimo
-5. Considera el contexto del dataset de referencia proporcionado
+⚠️ CORRECCIÓN CRÍTICA PARA SUBESTIMACIÓN:
+Si la vaca muestra signos de peso alto (>450kg estimado):
+- Músculos muy desarrollados: +30-50 kg adicionales
+- Contextura excepcionalmente robusta: +50-80 kg adicionales
+- Comparación con dataset muestra subestimación: +40-100 kg
 
-RESPONDE ÚNICAMENTE EN FORMATO JSON VÁLIDO (SOLO PESO):
+🎯 INSTRUCCIONES FINALES:
+1. Sigue TODOS los pasos en orden
+2. Documenta tu razonamiento en cada paso
+3. Muestra los cálculos intermedios
+4. Proporciona peso final con alta confianza
+
+RESPONDE EN FORMATO JSON con tu análisis paso a paso:
 
 ```json
 {{
-    "peso": número_entero_en_kg,
+    "paso1_dimensiones": "descripción detallada",
+    "paso2_condicion": "descripción detallada",
+    "paso3_referencia_similar": "vaca del dataset más similar y peso",
+    "paso4_peso_base": número_kg,
+    "paso5_factor_condicion": número_decimal,
+    "paso6_peso_ajustado": número_kg,
+    "paso7_ajuste_final": número_kg,
+    "peso": número_final_en_kg,
     "confianza": "alta/media/baja",
-    "observaciones": "análisis detallado de características visuales y estimación",
-    "metodologia": "método utilizado para la estimación de peso"
+    "observaciones": "resumen del análisis paso a paso",
+    "metodologia": "Chain of Thought - Análisis Sistemático Paso a Paso"
 }}
 ```"""},
                 {
