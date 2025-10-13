@@ -1384,42 +1384,42 @@ export default function Home() {
                 </p>
 
                 {/* Características en Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-brain text-green-600 text-xl"></i>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                      <i className="fas fa-brain text-green-600 text-2xl"></i>
                     </div>
-                    <span className="text-gray-800 font-medium">Análisis de peso con IA en segundos</span>
+                    <span className="text-gray-800 font-medium text-lg">Análisis de peso con IA en segundos</span>
                   </div>
                   
-                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-wifi-slash text-green-600 text-xl"></i>
+                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                      <i className="fas fa-wifi-slash text-green-600 text-2xl"></i>
                     </div>
-                    <span className="text-gray-800 font-medium">Funciona sin conexión a internet</span>
+                    <span className="text-gray-800 font-medium text-lg">Funciona sin conexión a internet</span>
                   </div>
                   
-                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-cloud-upload-alt text-green-600 text-xl"></i>
+                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                      <i className="fas fa-cloud-upload-alt text-green-600 text-2xl"></i>
                     </div>
-                    <span className="text-gray-800 font-medium">Sincronización automática con la nube</span>
+                    <span className="text-gray-800 font-medium text-lg">Sincronización automática con la nube</span>
                   </div>
                   
-                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-history text-green-600 text-xl"></i>
+                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                      <i className="fas fa-history text-green-600 text-2xl"></i>
                     </div>
-                    <span className="text-gray-800 font-medium">Historial completo de análisis</span>
+                    <span className="text-gray-800 font-medium text-lg">Historial completo de análisis</span>
                   </div>
                 </div>
 
                 {/* Botón de Descarga Grande */}
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-6">
                   <a 
                     href="/downloads/agrotechvision.apk" 
                     download
-                    className="inline-flex items-center gap-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/50 hover:-translate-y-2 transform"
+                    className="inline-flex items-center gap-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-12 py-6 rounded-2xl font-bold text-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/50 hover:-translate-y-2 transform"
                   >
                     <i className="fas fa-download text-3xl"></i>
                     <div className="text-left">
@@ -1428,7 +1428,7 @@ export default function Home() {
                     </div>
                   </a>
 
-                  <div className="flex items-center gap-6 text-sm text-gray-600">
+                  <div className="flex items-center gap-8 text-sm text-gray-600">
                     <div className="flex items-center gap-2">
                       <i className="fas fa-tag text-green-500"></i>
                       <span>Versión 1.0.0</span>
@@ -1453,44 +1453,44 @@ export default function Home() {
                 Cómo instalar la app
               </h3>
               
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+              <div className="space-y-6">
+                <div className="flex items-start gap-5">
+                  <div className="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-lg">
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Descarga el APK</h4>
-                    <p className="text-gray-600 text-sm">Haz clic en el botón "Descargar APK" arriba</p>
+                    <h4 className="font-semibold text-gray-900 mb-2 text-lg">Descarga el APK</h4>
+                    <p className="text-gray-600">Haz clic en el botón "Descargar APK" arriba</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                <div className="flex items-start gap-5">
+                  <div className="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-lg">
                     2
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Habilita fuentes desconocidas</h4>
-                    <p className="text-gray-600 text-sm">Ve a Configuración → Seguridad → Permitir instalación desde fuentes desconocidas</p>
+                    <h4 className="font-semibold text-gray-900 mb-2 text-lg">Habilita fuentes desconocidas</h4>
+                    <p className="text-gray-600">Ve a Configuración → Seguridad → Permitir instalación desde fuentes desconocidas</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                <div className="flex items-start gap-5">
+                  <div className="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-lg">
                     3
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Instala la app</h4>
-                    <p className="text-gray-600 text-sm">Abre el archivo descargado y sigue las instrucciones</p>
+                    <h4 className="font-semibold text-gray-900 mb-2 text-lg">Instala la app</h4>
+                    <p className="text-gray-600">Abre el archivo descargado y sigue las instrucciones</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">
+                <div className="flex items-start gap-5">
+                  <div className="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-lg">
                     4
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">¡Listo para usar!</h4>
-                    <p className="text-gray-600 text-sm">Abre la app e inicia sesión con tu cuenta de AgroTech Vision</p>
+                    <h4 className="font-semibold text-gray-900 mb-2 text-lg">¡Listo para usar!</h4>
+                    <p className="text-gray-600">Abre la app e inicia sesión con tu cuenta de AgroTech Vision</p>
                   </div>
                 </div>
               </div>
