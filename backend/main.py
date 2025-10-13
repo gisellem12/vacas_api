@@ -661,7 +661,7 @@ async def test_ai_analysis(image_id: str):
         raise HTTPException(status_code=500, detail=f"Error en análisis: {str(e)}")
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8080))
     print(f"🚀 Starting server on port {port}")
     print(f"🌍 Host: 0.0.0.0")
     print(f"📡 Environment PORT: {os.environ.get('PORT', 'Not set')}")
