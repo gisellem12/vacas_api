@@ -909,7 +909,7 @@ def load_dataset_reference():
     """Carga el dataset de referencia para estimaciones precisas"""
     global DATASET_REFERENCE
     try:
-        dataset_path = os.path.join(os.path.dirname(__file__), 'dataset-ninja', 'expanded_cows', 'annotations_expanded.json')
+        dataset_path = os.path.join(os.path.dirname(__file__), 'dataset-ninja', 'integrated_cows', 'annotations_integrated.json')
         if os.path.exists(dataset_path):
             with open(dataset_path, 'r', encoding='utf-8') as f:
                 DATASET_REFERENCE = json.load(f)

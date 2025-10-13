@@ -731,8 +731,8 @@ export default function Home() {
         
           {/* Botón de acción */}
           <div className="flex justify-center">
-            <a href="#" className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 min-h-[54px] shadow-lg hover:shadow-xl" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
-              <i className="fas fa-robot"></i>
+            <a href="#" className="bg-transparent backdrop-blur-sm border-2 border-green-500 hover:border-green-600 hover:bg-green-500/10 hover:shadow-green-500/25 text-green-600 hover:text-green-500 px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 min-h-[54px] shadow-lg hover:shadow-xl hover:shadow-green-500/20" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
+              <i className="fas fa-robot text-green-600"></i>
               Probar IA Gratis
             </a>
           </div>

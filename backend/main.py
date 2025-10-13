@@ -12,6 +12,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
 from contextlib import asynccontextmanager
 import asyncio
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde config.env
+load_dotenv("config.env")
 
 # Importar módulos de autenticación
 from auth import (
@@ -547,6 +551,98 @@ async def calibrate_weight(file: UploadFile = File(...), peso_real: int = None):
     except Exception as e:
         print(f"❌ Error en calibración: {e}")
         raise HTTPException(status_code=500, detail=f"Error en calibración: {str(e)}")
+
+# Endpoint para probar IA gratis con imágenes de ejemplo
+@app.get("/test-ai-free")
+async def test_ai_free():
+    """
+    Endpoint para probar la IA gratis con imágenes de ejemplo del dataset
+    """
+    try:
+        # Lista de imágenes de ejemplo del dataset integrado
+        test_images = [
+            {
+                "id": "cow_001_side",
+                "description": "Vaca 1 - Vista lateral",
+                "expected_weight": "450-500 kg"
+            },
+            {
+                "id": "cow_015_side", 
+                "description": "Vaca 15 - Vista lateral",
+                "expected_weight": "380-420 kg"
+            },
+            {
+                "id": "cow_030_side",
+                "description": "Vaca 30 - Vista lateral", 
+                "expected_weight": "520-570 kg"
+            },
+            {
+                "id": "cow_045_side",
+                "description": "Vaca 45 - Vista lateral",
+                "expected_weight": "600-650 kg"
+            },
+            {
+                "id": "cow_072_back",
+                "description": "Vaca 72 - Vista posterior",
+                "expected_weight": "480-530 kg"
+            }
+        ]
+        
+        return {
+            "message": "🎯 Modo de prueba IA gratis activado",
+            "available_images": test_images,
+            "instructions": "Usa /test-ai-analysis/{image_id} para analizar una imagen específica",
+            "total_images": len(test_images),
+            "dataset_info": "72 vacas con medidas reales integradas"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+@app.get("/test-ai-analysis/{image_id}")
+async def test_ai_analysis(image_id: str):
+    """
+    Analiza una imagen específica del dataset para probar la IA gratis
+    """
+    try:
+        # Construir la ruta de la imagen
+        image_path = f"dataset-ninja/integrated_cows/images/{image_id}.jpg"
+        
+        if not os.path.exists(image_path):
+            raise HTTPException(status_code=404, detail="Imagen no encontrada")
+        
+        print(f"🔍 Analizando imagen de prueba: {image_id}")
+        
+        # Leer la imagen
+        with open(image_path, "rb") as image_file:
+            image_data = image_file.read()
+        
+        # Crear un archivo temporal para simular upload
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+            temp_file.write(image_data)
+            temp_path = temp_file.name
+        
+        try:
+            # Analizar la imagen
+            result = analyze_cow_image_with_json_output(temp_path)
+            
+            return {
+                "success": True,
+                "message": f"✅ Análisis completado para {image_id}",
+                "image_id": image_id,
+                "analysis": result,
+                "test_mode": True,
+                "note": "Esta es una imagen del dataset integrado con medidas reales"
+            }
+            
+        finally:
+            # Limpiar archivo temporal
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+                
+    except Exception as e:
+        print(f"❌ Error en análisis de prueba: {e}")
+        raise HTTPException(status_code=500, detail=f"Error en análisis: {str(e)}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
