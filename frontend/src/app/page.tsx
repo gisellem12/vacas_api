@@ -1378,41 +1378,10 @@ export default function Home() {
                   AgroTech Vision Mobile
                 </h3>
                 
-                <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+                <p className="text-lg text-gray-600 mb-12 leading-relaxed">
                   Accede a todas las funcionalidades de nuestra plataforma desde tu smartphone. 
                   Análisis en tiempo real, gestión de ganado, y reportes detallados en la palma de tu mano.
                 </p>
-
-                {/* Características en Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-brain text-green-600 text-2xl"></i>
-                    </div>
-                    <span className="text-gray-800 font-medium text-lg">Análisis de peso con IA en segundos</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-wifi-slash text-green-600 text-2xl"></i>
-                    </div>
-                    <span className="text-gray-800 font-medium text-lg">Funciona sin conexión a internet</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-cloud-upload-alt text-green-600 text-2xl"></i>
-                    </div>
-                    <span className="text-gray-800 font-medium text-lg">Sincronización automática con la nube</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex-shrink-0 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                      <i className="fas fa-history text-green-600 text-2xl"></i>
-                    </div>
-                    <span className="text-gray-800 font-medium text-lg">Historial completo de análisis</span>
-                  </div>
-                </div>
 
                 {/* Botón de Descarga Grande */}
                 <div className="flex flex-col items-center gap-6">
