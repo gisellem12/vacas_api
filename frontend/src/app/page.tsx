@@ -317,7 +317,7 @@ export default function Home() {
           });
         }
         
-        showNotification('✅ ¡Registro exitoso! Bienvenido a AgroTech Vision', 'success');
+        showNotification('✅ ¡Registro exitoso! Bienvenido a AgroTech', 'success');
         setShowRegisterModal(false);
         // Reset del formulario de manera segura
         try {
@@ -479,7 +479,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
                 <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
               </h2>
-              <p>Accede a tu cuenta de AgroTech Vision</p>
+              <p>Accede a tu cuenta de AgroTech</p>
             </div>
             <div className="p-6">
               <form onSubmit={handleLogin}>
@@ -539,7 +539,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
                 <i className="fas fa-user-plus"></i> Crear Cuenta
               </h2>
-              <p>Únete a AgroTech Vision y comienza a transformar tu ganadería</p>
+              <p>Únete a AgroTech y comienza a transformar tu ganadería</p>
             </div>
             <div className="p-6">
               <form onSubmit={handleRegister}>
@@ -750,7 +750,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Transforma tu Gestión Ganadera</h2>
             <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              AgroTech Vision utiliza inteligencia artificial de vanguardia para estimar 
+              AgroTech utiliza inteligencia artificial de vanguardia para estimar 
               el peso de tu ganado con precisión excepcional.
             </p>
           </div>
@@ -1361,7 +1361,7 @@ export default function Home() {
               Descarga Nuestra App Móvil
             </h2>
             <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Lleva AgroTech Vision en tu bolsillo. Analiza tus vacas desde cualquier lugar con nuestra aplicación móvil.
+              Lleva AgroTech en tu bolsillo. Analiza tus vacas desde cualquier lugar con nuestra aplicación móvil.
             </p>
           </div>
 
@@ -1375,7 +1375,7 @@ export default function Home() {
                 </div>
                 
                 <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  AgroTech Vision Mobile
+                  AgroTech Mobile
                 </h3>
                 
                 <p className="text-lg text-gray-600 mb-12 leading-relaxed">
@@ -1393,7 +1393,7 @@ export default function Home() {
                     <i className="fas fa-download text-3xl"></i>
                     <div className="text-left">
                       <div className="text-sm font-normal opacity-90">Descargar APK</div>
-                      <div className="text-2xl">AgroTech Vision</div>
+                      <div className="text-2xl">AgroTech</div>
                     </div>
                   </a>
 
@@ -1459,7 +1459,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2 text-lg">¡Listo para usar!</h4>
-                    <p className="text-gray-600">Abre la app e inicia sesión con tu cuenta de AgroTech Vision</p>
+                    <p className="text-gray-600">Abre la app e inicia sesión con tu cuenta de AgroTech</p>
                   </div>
                 </div>
               </div>
@@ -1526,7 +1526,7 @@ export default function Home() {
       <footer className="bg-gray-900 text-gray-400 py-12 px-4 mt-16">
         <div className="max-w-6xl mx-auto text-center">
           <a href="#" className="text-2xl font-bold text-white mb-4 inline-block hover:text-green-400 transition-colors">
-            AgroTech Vision
+            AgroTech
           </a>
           
           <p className="text-base mb-8 leading-relaxed max-w-xl mx-auto">
@@ -1535,7 +1535,7 @@ export default function Home() {
           </p>
           
           <div className="border-t border-gray-700 pt-8">
-            <p className="text-sm">&copy; 2024 AgroTech Vision. Todos los derechos reservados.</p>
+            <p className="text-sm">&copy; 2024 AgroTech. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
