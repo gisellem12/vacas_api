@@ -611,7 +611,6 @@ export default function Home() {
               <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
               <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
               <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>Chat IA</a>
-              <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>Descargar App</a>
               <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
               <a href="#" className={`px-4 py-3 rounded-xl transition-colors text-base font-medium ${activeSection === 'planes' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
             </nav>
@@ -684,7 +683,6 @@ export default function Home() {
                 <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
                 <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
                 <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>Chat IA</a>
-                <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>Descargar App</a>
                 <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
                 <a href="#" className={`px-4 py-4 rounded-xl transition-colors text-base font-medium ${activeSection === 'planes' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
               </nav>
@@ -756,11 +754,15 @@ export default function Home() {
             Precisa, no invasiva y accesible desde tu dispositivo móvil.
           </p>
         
-          {/* Botón de acción */}
-          <div className="flex justify-center">
-            <a href="#" className="bg-transparent backdrop-blur-sm border-2 border-green-500 hover:border-green-600 hover:bg-green-500/10 hover:shadow-green-500/25 text-green-600 hover:text-green-500 px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 min-h-[54px] shadow-lg hover:shadow-xl hover:shadow-green-500/20" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
+          {/* Botones de acción */}
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="#" className="bg-transparent backdrop-blur-sm border-2 border-green-500 hover:border-green-600 hover:bg-green-500/10 hover:shadow-green-500/25 text-green-600 hover:text-green-500 px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 min-h-[54px] shadow-lg hover:shadow-xl hover:shadow-green-500/20" onClick={(e) => { e.preventDefault(); showSection('chat'); }}>
               <i className="fas fa-robot text-green-600"></i>
               Probar IA Gratis
+            </a>
+            <a href="#" className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 min-h-[54px] shadow-lg hover:shadow-xl hover:from-green-600 hover:to-green-700" onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>
+              <i className="fas fa-mobile-alt text-white"></i>
+              Descargar App
             </a>
           </div>
         </div>
