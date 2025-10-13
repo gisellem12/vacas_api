@@ -596,63 +596,63 @@ export default function Home() {
         {isScrolling && (
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-600 animate-pulse"></div>
         )}
-        <div className="max-w-6xl mx-auto px-4 py-2">
+        <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <a href="#" className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors">
               AgroTech
             </a>
             
             {/* Botones de autenticación para móvil en el header */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-3">
               {isAuthenticated && user ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <span className="text-sm font-semibold text-green-600 hidden sm:block">
                     ¡Hola, {user.name}!
                   </span>
                   <button 
                     onClick={handleLogout}
-                    className="bg-gray-100 text-gray-700 py-1 px-3 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors border border-gray-300"
+                    className="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors border border-gray-300"
                   >
                     Salir
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   <button 
                     onClick={() => setShowLoginModal(true)}
-                    className="bg-gray-100 text-gray-700 py-1 px-2 rounded text-sm font-semibold hover:bg-gray-200 transition-colors"
+                    className="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors"
                   >
                     Entrar
                   </button>
                   <button 
                     onClick={() => setShowRegisterModal(true)}
-                    className="bg-gradient-to-r from-green-500 to-green-600 text-white py-1 px-2 rounded text-sm font-semibold hover:from-green-600 hover:to-green-700 transition-colors"
+                    className="bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-3 rounded-lg text-sm font-semibold hover:from-green-600 hover:to-green-700 transition-colors"
                   >
-                    Reg.
+                    Registrarse
                   </button>
                 </div>
               )}
-              <button className="p-1 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <button className="p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                 <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
               </button>
             </div>
             
-            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-4 md:p-0 gap-1 md:gap-12`}>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'inicio' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>
+            <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none border-t md:border-t-0 border-gray-200 md:border-0 p-6 md:p-0 gap-4 md:gap-12`}>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'inicio' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('inicio'); }}>Inicio</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'mision' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('mision'); }}>Misión</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>
                 Descargar App
               </a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
-              <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'planes' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
+              <a href="#" className={`px-4 py-3 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'planes' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('planes'); }}>Planes</a>
               
               {/* Botones de autenticación para móvil */}
-              <div className="md:hidden flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
+              <div className="md:hidden flex flex-col gap-4 mt-6 pt-6 border-t border-gray-200">
                 {isAuthenticated && user ? (
-                  <div className="flex flex-col gap-3">
-                    <div className="bg-green-50 rounded-lg p-3 text-center">
+                  <div className="flex flex-col gap-4">
+                    <div className="bg-green-50 rounded-lg p-4 text-center">
                       <div className="flex items-center justify-center gap-2 mb-2">
                         <i className="fas fa-user-circle text-green-600 text-xl"></i>
                         <span className="text-green-700 font-semibold text-lg">
