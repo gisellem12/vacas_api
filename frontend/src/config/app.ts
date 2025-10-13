@@ -1,6 +1,6 @@
 // Configuración de la aplicación
 export const APP_CONFIG = {
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://vacasapi-production.up.railway.app',
   MAX_FILE_SIZE: 20 * 1024 * 1024, // 20MB
   ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   UPLOAD_PROGRESS_INTERVAL: 200, // ms
