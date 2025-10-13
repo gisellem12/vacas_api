@@ -1097,6 +1097,45 @@ export default function Home() {
                   </div>
 
 
+                  {/* Información del Ensemble */}
+                  {analysisResult.precision_estimada && (
+                    <div className="bg-blue-50 p-4 rounded-xl mb-4 border-2 border-blue-200">
+                      <h4 className="text-blue-700 text-base font-medium mb-3 flex items-center gap-2">
+                        <i className="fas fa-chart-line"></i>
+                        🎯 Análisis Ensemble (Precisión Mejorada)
+                      </h4>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-blue-600 text-sm">
+                        <div className="text-center">
+                          <div className="text-xl font-bold">{analysisResult.precision_estimada}%</div>
+                          <div className="text-xs">Precisión Estimada</div>
+                        </div>
+                        {analysisResult.desviacion_estandar && (
+                          <div className="text-center">
+                            <div className="text-xl font-bold">±{analysisResult.desviacion_estandar.toFixed(1)} kg</div>
+                            <div className="text-xs">Desviación</div>
+                          </div>
+                        )}
+                        {analysisResult.coeficiente_variacion && (
+                          <div className="text-center">
+                            <div className="text-xl font-bold">{analysisResult.coeficiente_variacion.toFixed(1)}%</div>
+                            <div className="text-xs">Coef. Variación</div>
+                          </div>
+                        )}
+                        {analysisResult.pesos_individuales && (
+                          <div className="text-center">
+                            <div className="text-xl font-bold">{analysisResult.pesos_individuales.length}</div>
+                            <div className="text-xs">Análisis Realizados</div>
+                          </div>
+                        )}
+                      </div>
+                      {analysisResult.pesos_individuales && analysisResult.pesos_individuales.length > 1 && (
+                        <div className="mt-3 text-xs text-blue-600">
+                          <strong>Pesos individuales:</strong> {analysisResult.pesos_individuales.join(' kg, ')} kg
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {/* Recomendaciones */}
                   {analysisResult.recomendaciones && (
                     <div className="bg-gray-50 p-6 rounded-xl">

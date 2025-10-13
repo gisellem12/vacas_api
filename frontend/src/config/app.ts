@@ -36,4 +36,12 @@ export interface PredictionResult {
   observaciones?: string;
   dispositivo?: string;
   ajustes_aplicados?: string;
+  // Campos del Ensemble Model
+  precision_estimada?: number;
+  desviacion_estandar?: number;
+  coeficiente_variacion?: number;
+  peso_promedio?: number;
+  peso_mediana?: number;
+  pesos_individuales?: number[];
+  outliers_removidos?: number;
 }
