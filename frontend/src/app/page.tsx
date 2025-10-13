@@ -643,7 +643,6 @@ export default function Home() {
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'como-funciona' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('como-funciona'); }}>Cómo Funciona</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'chat' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('chat'); }}>IA Chat</a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'descargar-app' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('descargar-app'); }}>
-                <i className="fas fa-mobile-alt mr-1"></i>
                 Descargar App
               </a>
               <a href="#" className={`px-3 py-2 rounded-lg transition-colors text-center md:text-left text-sm font-medium ${activeSection === 'contacto' ? 'bg-green-50 text-green-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`} onClick={(e) => { e.preventDefault(); showSection('contacto'); }}>Contacto</a>
