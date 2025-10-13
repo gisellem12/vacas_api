@@ -20,18 +20,18 @@ load_dotenv("config.env")
 # Crear la aplicación FastAPI
 app = FastAPI(title="AgroTech Vision API", version="1.0.0")
 
-# Endpoint de healthcheck para Railway
+# Endpoint de healthcheck para Railway - MUY SIMPLE
 @app.get("/")
 async def healthcheck():
     """Endpoint de healthcheck para Railway"""
     print("🔍 Healthcheck endpoint called")
-    return {"status": "ok", "message": "AgroTech Vision API is running", "version": "1.0.0"}
+    return {"status": "ok"}
 
 @app.get("/health")
 async def health():
     """Endpoint alternativo de healthcheck"""
     print("🔍 Health endpoint called")
-    return {"status": "healthy", "message": "API is running"}
+    return {"status": "healthy"}
 
 # Importar módulos de autenticación
 from auth import (
