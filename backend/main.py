@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 load_dotenv("config.env")
 
 # ===== SISTEMA DE MODO DE MANTENIMIENTO =====
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True  # Activar por defecto
 MAINTENANCE_MESSAGE = "Sistema en mantenimiento. Actualización en progreso..."
 
 def set_maintenance_mode(enabled: bool, message: str = None):
