@@ -17,6 +17,32 @@ from dotenv import load_dotenv
 # Cargar variables de entorno desde config.env
 load_dotenv("config.env")
 
+# ===== SISTEMA DE MODO DE MANTENIMIENTO =====
+MAINTENANCE_MODE = False
+MAINTENANCE_MESSAGE = "Sistema en mantenimiento. Actualización en progreso..."
+
+def set_maintenance_mode(enabled: bool, message: str = None):
+    """Activa o desactiva el modo de mantenimiento"""
+    global MAINTENANCE_MODE, MAINTENANCE_MESSAGE
+    MAINTENANCE_MODE = enabled
+    if message:
+        MAINTENANCE_MESSAGE = message
+    print(f"🔧 Modo de mantenimiento: {'ACTIVADO' if enabled else 'DESACTIVADO'}")
+    if enabled:
+        print(f"📝 Mensaje: {MAINTENANCE_MESSAGE}")
+
+def check_maintenance_mode():
+    """Verifica si el sistema está en modo de mantenimiento"""
+    if MAINTENANCE_MODE:
+        raise HTTPException(
+            status_code=503, 
+            detail={
+                "error": "maintenance_mode",
+                "message": MAINTENANCE_MESSAGE,
+                "status": "maintenance"
+            }
+        )
+
 # Crear la aplicación FastAPI
 app = FastAPI(title="AgroTech Vision API", version="1.0.0")
 
@@ -25,13 +51,90 @@ app = FastAPI(title="AgroTech Vision API", version="1.0.0")
 async def healthcheck():
     """Endpoint de healthcheck para Railway"""
     print("🔍 Healthcheck endpoint called")
-    return {"status": "ok"}
+    if MAINTENANCE_MODE:
+        return {
+            "status": "maintenance",
+            "message": MAINTENANCE_MESSAGE,
+            "maintenance_mode": True
+        }
+    return {"status": "ok", "maintenance_mode": False}
 
 @app.get("/health")
 async def health():
     """Endpoint alternativo de healthcheck"""
     print("🔍 Health endpoint called")
-    return {"status": "healthy"}
+    if MAINTENANCE_MODE:
+        return {
+            "status": "maintenance", 
+            "message": MAINTENANCE_MESSAGE,
+            "maintenance_mode": True
+        }
+    return {"status": "healthy", "maintenance_mode": False}
+
+@app.get("/status")
+async def system_status():
+    """Endpoint para verificar el estado del sistema"""
+    return {
+        "status": "maintenance" if MAINTENANCE_MODE else "operational",
+        "maintenance_mode": MAINTENANCE_MODE,
+        "message": MAINTENANCE_MESSAGE if MAINTENANCE_MODE else "Sistema operativo",
+        "ai_enabled": not MAINTENANCE_MODE,
+        "timestamp": __import__('datetime').datetime.now().isoformat()
+    }
+
+# ===== ENDPOINTS DE ADMINISTRACIÓN DE MANTENIMIENTO =====
+
+class MaintenanceRequest(BaseModel):
+    enabled: bool
+    message: str = None
+
+@app.post("/admin/maintenance")
+async def toggle_maintenance_mode(request: MaintenanceRequest):
+    """
+    Endpoint para activar/desactivar el modo de mantenimiento
+    Solo para administradores - en producción debería tener autenticación
+    """
+    try:
+        set_maintenance_mode(request.enabled, request.message)
+        return {
+            "success": True,
+            "maintenance_mode": MAINTENANCE_MODE,
+            "message": MAINTENANCE_MESSAGE,
+            "ai_enabled": not MAINTENANCE_MODE,
+            "timestamp": __import__('datetime').datetime.now().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error configurando modo de mantenimiento: {str(e)}")
+
+@app.post("/admin/maintenance/enable")
+async def enable_maintenance_mode(message: str = "Sistema en mantenimiento. Actualización en progreso..."):
+    """Activa el modo de mantenimiento"""
+    try:
+        set_maintenance_mode(True, message)
+        return {
+            "success": True,
+            "message": "Modo de mantenimiento activado",
+            "maintenance_mode": True,
+            "ai_enabled": False,
+            "maintenance_message": MAINTENANCE_MESSAGE
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error activando modo de mantenimiento: {str(e)}")
+
+@app.post("/admin/maintenance/disable")
+async def disable_maintenance_mode():
+    """Desactiva el modo de mantenimiento"""
+    try:
+        set_maintenance_mode(False)
+        return {
+            "success": True,
+            "message": "Modo de mantenimiento desactivado",
+            "maintenance_mode": False,
+            "ai_enabled": True,
+            "status": "Sistema operativo"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error desactivando modo de mantenimiento: {str(e)}")
 
 # Importar módulos de autenticación
 from auth import (
@@ -286,6 +389,9 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
 
 @app.post("/predict")
 async def predict(cow: CowURL):
+    # Verificar modo de mantenimiento
+    check_maintenance_mode()
+    
     image_url = cow.url
     print(f"🔍 Procesando URL en endpoint: {image_url}")
     
@@ -369,6 +475,9 @@ async def predict(cow: CowURL):
 @app.post("/predict-file")
 async def predict_file(file: UploadFile = File(...)):
     """Endpoint para analizar imagen enviada como archivo"""
+    # Verificar modo de mantenimiento
+    check_maintenance_mode()
+    
     print(f"🔍 Procesando archivo: {file.filename}")
     print(f"📊 Tipo de contenido: {file.content_type}")
     
@@ -477,6 +586,9 @@ async def predict_file(file: UploadFile = File(...)):
 @app.post("/predict-multipart")
 async def predict_multipart(file: UploadFile = File(...)):
     """Endpoint alternativo para analizar imagen enviada como multipart/form-data"""
+    # Verificar modo de mantenimiento
+    check_maintenance_mode()
+    
     return await predict_file(file)
 
 @app.get("/test")
@@ -619,6 +731,9 @@ async def test_ai_analysis(image_id: str):
     """
     Analiza una imagen específica del dataset para probar la IA gratis
     """
+    # Verificar modo de mantenimiento
+    check_maintenance_mode()
+    
     try:
         # Construir la ruta de la imagen
         image_path = f"dataset-ninja/integrated_cows/images/{image_id}.jpg"
