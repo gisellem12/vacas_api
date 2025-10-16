@@ -34,6 +34,8 @@ export default function Home() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<PredictionResult | null>(null);
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   // Debug: Monitorear cambios en analysisResult
@@ -44,6 +46,7 @@ export default function Home() {
   // Verificar sesión al cargar la página
   useEffect(() => {
     checkAuthStatus();
+    checkSystemStatus();
   }, []);
 
   const checkAuthStatus = async () => {
@@ -68,6 +71,22 @@ export default function Home() {
       setUser(null);
     } finally {
       setIsLoadingAuth(false);
+    }
+  };
+
+  const checkSystemStatus = async () => {
+    try {
+      const response = await fetch(`${APP_CONFIG.API_BASE_URL}/status`);
+      if (response.ok) {
+        const status = await response.json();
+        setIsMaintenanceMode(status.maintenance_mode || false);
+        setMaintenanceMessage(status.message || '');
+        console.log('🔧 Estado del sistema:', status);
+      }
+    } catch (error) {
+      console.error('Error verificando estado del sistema:', error);
+      // En caso de error, asumir que no está en mantenimiento
+      setIsMaintenanceMode(false);
     }
   };
 
@@ -101,6 +120,12 @@ export default function Home() {
 
   const handleFileUpload = async (file: File) => {
     console.log('Archivo seleccionado:', file.name);
+    
+    // Verificar si el sistema está en modo de mantenimiento
+    if (isMaintenanceMode) {
+      alert(`🔧 ${maintenanceMessage}`);
+      return;
+    }
     
     if (!file.type.match('image.*')) {
       alert('❌ Por favor, sube solo imágenes (JPG, PNG, WEBP)');
@@ -1017,15 +1042,27 @@ export default function Home() {
                 </p>
               </div>
               
-              {/* Área de subida de imágenes */}
+              {/* Área de subida de imágenes o mensaje de mantenimiento */}
               <div className="bg-gray-50 rounded-2xl p-6 mb-8">
-                <div 
-                  className={`border-3 border-dashed border-green-500 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:border-green-600 hover:bg-green-50/50 ${isDragOver ? 'border-green-600 bg-green-50 scale-105' : ''} ${isUploading ? 'pointer-events-none bg-green-50' : ''}`}
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                >
+                {isMaintenanceMode ? (
+                  /* Mensaje de mantenimiento */
+                  <div className="border-3 border-dashed border-orange-500 rounded-2xl p-8 text-center bg-orange-50">
+                    <div className="text-6xl mb-4">
+                      <i className="fas fa-tools text-orange-500"></i>
+                    </div>
+                    <h3 className="text-2xl font-bold text-orange-700 mb-4">🔧 Sistema en Mantenimiento</h3>
+                    <p className="text-lg text-orange-600 mb-2">{maintenanceMessage}</p>
+                    <p className="text-sm text-orange-500">Por favor, intenta más tarde</p>
+                  </div>
+                ) : (
+                  /* Área de carga normal */
+                  <div 
+                    className={`border-3 border-dashed border-green-500 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:border-green-600 hover:bg-green-50/50 ${isDragOver ? 'border-green-600 bg-green-50 scale-105' : ''} ${isUploading ? 'pointer-events-none bg-green-50' : ''}`}
+                    onClick={() => fileInputRef.current?.click()}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                  >
                   <input 
                     ref={fileInputRef}
                     type="file" 
@@ -1055,19 +1092,21 @@ export default function Home() {
                   )}
                 </div>
                 
-                {previewUrl && (
-                  <div className="mt-6 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                    <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
-                      <h5 className="text-gray-900 font-semibold flex items-center gap-2">
-                        <i className="fas fa-image text-green-500"></i> Vista Previa
-                      </h5>
-                      <button className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors" onClick={clearImage}>
-                        <i className="fas fa-times"></i>
-                      </button>
-                    </div>
-                    <div className="p-4 flex justify-center">
-                      <img src={previewUrl} alt="Preview de ganado" className="max-w-full max-h-80 rounded-lg shadow-md object-cover" />
-                    </div>
+                    {previewUrl && (
+                      <div className="mt-6 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                        <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
+                          <h5 className="text-gray-900 font-semibold flex items-center gap-2">
+                            <i className="fas fa-image text-green-500"></i> Vista Previa
+                          </h5>
+                          <button className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors" onClick={clearImage}>
+                            <i className="fas fa-times"></i>
+                          </button>
+                        </div>
+                        <div className="p-4 flex justify-center">
+                          <img src={previewUrl} alt="Preview de ganado" className="max-w-full max-h-80 rounded-lg shadow-md object-cover" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
